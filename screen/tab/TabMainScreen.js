@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, SafeAreaView, TouchableOpacity, ScrollView} from 'react-native';
 import React from 'react';
 import {useAppContext} from '../../store/context';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -36,10 +36,12 @@ const TabMainScreen = () => {
         </TouchableOpacity>
       </View>
 
+<View style={styles.taskContainer}>
+  
+  <ScrollView style={{flex: 1}}>
+
       {/* Empty State */}
       <View style={styles.emptyStateContainer}>
-
-      
         <TouchableOpacity style={styles.emptyStateTextContainer}>
           <Icon name="add" size={42} color="#FFFFFF" />
         </TouchableOpacity>
@@ -48,6 +50,8 @@ const TabMainScreen = () => {
         </Text>
         <Text style={styles.addTaskText}>Tap "+" to add the new one</Text>
       </View>
+  </ScrollView>
+</View>
       <View style={{height: 100}} />
     </SafeAreaView>
   );
@@ -134,6 +138,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#2D2940',
     margin: 16,
     borderRadius: 16,
+    padding: 10,
+   
   },
   plusIcon: {
     fontSize: 40,
@@ -148,5 +154,11 @@ const styles = StyleSheet.create({
   addTaskText: {
     color: '#8E8E93',
     fontSize: 14,
+  },
+  taskContainer: {
+    flex: 1,
+    borderWidth: 1,
+    marginHorizontal: 16,
+    borderRadius: 16,
   },
 });
