@@ -26,10 +26,10 @@ export const AppContext = ({children}) => {
     await saveTasksToStorage(updatedTasks);
   };
 
-  const deleteTask = async taskId => {
-    const updatedTasks = allTasks.filter(task => task.id !== taskId);
+  const deleteTask = async (taskId) => {
+    const updatedTasks = removeTask(taskId, allTasks);
     setAllTasks(updatedTasks);
-    await saveTasks(updatedTasks);
+    await saveTasksToStorage(updatedTasks);
   };
 
   const updateTask = async (taskId, updatedData) => {
