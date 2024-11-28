@@ -39,9 +39,9 @@ const TabNavigation = () => {
         options={{
           tabBarIcon: () => (
             // <View style={styles.addButtonContainer}>
-              <View style={styles.addButton}>
-                <Icon name="add" size={55} color="#FFFFFF" />
-              </View>
+            <View style={styles.addButton}>
+              <Icon name="add" size={55} color="#FFFFFF" />
+            </View>
             // </View>
           ),
         }}
@@ -72,18 +72,21 @@ export default TabNavigation;
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: '#2D2940',
-    borderTopWidth: 0,
-    height: 60,
+    backgroundColor: '#6F4D7B' + 50,
+    borderTopWidth: 1,
+    height: 70,
     position: 'absolute',
-    bottom: 24,
+    bottom: 20,
     left: 24,
     right: 24,
     borderRadius: 30,
     elevation: 0,
-    paddingHorizontal: 16,
-    paddingTop:10,
-    marginBottom:20
+    // paddingHorizontal: 16,
+    paddingTop: 10,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor:'#6F4D7B'
+   
   },
   addButtonContainer: {
     // position: 'absolute',
@@ -98,7 +101,6 @@ const styles = StyleSheet.create({
     borderRadius: 26,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius:50
-  
+    borderRadius: 50,
   },
 });
