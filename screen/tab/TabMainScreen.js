@@ -1,6 +1,9 @@
 import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
 import React from 'react';
 import {useAppContext} from '../../store/context';
+import Icon from 'react-native-vector-icons/Ionicons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Octicons from 'react-native-vector-icons/Octicons';
 
 const TabMainScreen = () => {
   const {allTasks} = useAppContext();
@@ -10,13 +13,13 @@ const TabMainScreen = () => {
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.iconButton}>
-          <Text>↩</Text>
+          <AntDesign name="back" size={28} color="#FFFFFF" />
         </View>
         <View style={styles.titleContainer}>
           <Text style={styles.headerTitle}>Your Goals</Text>
         </View>
         <View style={styles.iconButton}>
-          <Text>📈</Text>
+          <Octicons name="graph" size={28} color="#FFFFFF" />
         </View>
       </View>
 
@@ -28,7 +31,7 @@ const TabMainScreen = () => {
         </Text>
         <Text style={styles.quoteAuthor}>- Walt Disney</Text>
         <View style={styles.bookmarkIcon}>
-          <Text>🔖</Text>
+          <Icon name="bookmark-outline" size={28} color="#FFFFFF" />
         </View>
       </View>
 
@@ -59,16 +62,22 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   iconButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    // width: 40,
+    // height: 40,
+    borderRadius: '50%',
     backgroundColor: '#2D2940',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 15,
   },
   titleContainer: {
     flex: 1,
     alignItems: 'center',
+    backgroundColor: '#2D2940',
+   marginHorizontal: 30,
+   justifyContent: 'center',
+   borderRadius: 30,
+   paddingVertical: 15,
   },
   headerTitle: {
     color: '#FFFFFF',
