@@ -72,13 +72,15 @@ const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: '#2D2940',
     borderTopWidth: 0,
-    height: 60,
+    height: 90,
     position: 'absolute',
     bottom: 20,
     left: 20,
     right: 20,
     borderRadius: 30,
     elevation: 0,
+    justifyContent:'center',
+    alignItems:'center'
   },
   addButton: {
     backgroundColor: '#FF9F0A',

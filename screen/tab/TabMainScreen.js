@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
-import React from 'react'
-import { useAppContext } from '../../store/context'
+import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import React from 'react';
+import {useAppContext} from '../../store/context';
 
 const TabMainScreen = () => {
-  const { allTasks } = useAppContext()
+  const {allTasks} = useAppContext();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -35,14 +35,17 @@ const TabMainScreen = () => {
       {/* Empty State */}
       <View style={styles.emptyStateContainer}>
         <Text style={styles.plusIcon}>+</Text>
-        <Text style={styles.emptyStateText}>There are no tasks here right now</Text>
+        <Text style={styles.emptyStateText}>
+          There are no tasks here right now
+        </Text>
         <Text style={styles.addTaskText}>Tap "+" to add the new one</Text>
       </View>
+      <View style={{height: 100}} />
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default TabMainScreen
+export default TabMainScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -122,4 +125,4 @@ const styles = StyleSheet.create({
     color: '#8E8E93',
     fontSize: 14,
   },
-})
+});
