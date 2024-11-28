@@ -4,6 +4,7 @@ import {useAppContext} from '../../store/context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Octicons from 'react-native-vector-icons/Octicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const TabMainScreen = () => {
   const {allTasks} = useAppContext();
@@ -25,7 +26,7 @@ const TabMainScreen = () => {
 
       {/* Quote Card */}
       <View style={styles.quoteCard}>
-        <Text style={styles.quoteNumber}>99</Text>
+        <FontAwesome name="quote-right" size={28} color="gray" style={{paddingBottom: 10}} />
         <Text style={styles.quoteText}>
           "The way to get started is to quit talking and begin doing."
         </Text>
@@ -101,7 +102,8 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontStyle: 'italic',
-    marginBottom: 8,
+    marginVertical: 10,
+
   },
   quoteAuthor: {
     color: '#FFFFFF',
