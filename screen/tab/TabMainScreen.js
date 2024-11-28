@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import {StyleSheet, Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {useAppContext} from '../../store/context';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -13,15 +13,15 @@ const TabMainScreen = () => {
     <SafeAreaView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <View style={styles.iconButton}>
+        <TouchableOpacity style={styles.iconButton}>
           <AntDesign name="back" size={28} color="#FFFFFF" />
-        </View>
+        </TouchableOpacity>
         <View style={styles.titleContainer}>
           <Text style={styles.headerTitle}>Your Goals</Text>
         </View>
-        <View style={styles.iconButton}>
+        <TouchableOpacity style={styles.iconButton}>
           <Octicons name="graph" size={28} color="#FFFFFF" />
-        </View>
+        </TouchableOpacity>
       </View>
 
       {/* Quote Card */}
@@ -31,14 +31,18 @@ const TabMainScreen = () => {
           "The way to get started is to quit talking and begin doing."
         </Text>
         <Text style={styles.quoteAuthor}>- Walt Disney</Text>
-        <View style={styles.bookmarkIcon}>
+        <TouchableOpacity style={styles.bookmarkIcon}>
           <Icon name="bookmark-outline" size={28} color="#FFFFFF" />
-        </View>
+        </TouchableOpacity>
       </View>
 
       {/* Empty State */}
       <View style={styles.emptyStateContainer}>
-        <Text style={styles.plusIcon}>+</Text>
+
+      
+        <TouchableOpacity style={styles.emptyStateTextContainer}>
+          <Icon name="add" size={42} color="#FFFFFF" />
+        </TouchableOpacity>
         <Text style={styles.emptyStateText}>
           There are no tasks here right now
         </Text>
@@ -52,6 +56,12 @@ const TabMainScreen = () => {
 export default TabMainScreen;
 
 const styles = StyleSheet.create({
+  emptyStateTextContainer: {
+    backgroundColor: 'gray',
+    borderRadius: '50%',
+    padding: 10,
+    marginBottom: 10,
+  },
   container: {
     flex: 1,
     backgroundColor: '#1E1B2E',
@@ -113,6 +123,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 16,
     bottom: 16,
+    backgroundColor: 'gray',
+    borderRadius: '50%',
+    padding: 5,
   },
   emptyStateContainer: {
     flex: 1,
