@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     // width: 40,
     // height: 40,
     borderRadius: '50%',
-    backgroundColor: '#2D2940',
+    backgroundColor: '#6F4D7B'+50,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 15,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#2D2940',
+    backgroundColor: '#6F4D7B'+50,
    marginHorizontal: 30,
    justifyContent: 'center',
    borderRadius: 30,
@@ -102,9 +102,12 @@ const styles = StyleSheet.create({
   quoteCard: {
     margin: 16,
     padding: 20,
-    backgroundColor: '#2D2940',
+    backgroundColor: '#6F4D7B'+50,
     borderRadius: 16,
     position: 'relative',
+    borderWidth:1,
+    borderColor:'#6F4D7B'
+    
   },
   quoteNumber: {
     color: '#FFFFFF',
@@ -160,5 +163,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginHorizontal: 16,
     borderRadius: 16,
+    backgroundColor:'#6F4D7B'+50,
+    borderColor:'#6F4D7B'
   },
 });
