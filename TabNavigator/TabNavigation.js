@@ -13,14 +13,14 @@ const TabNavigation = () => {
         tabBarStyle: styles.tabBar,
         tabBarShowLabel: false,
         tabBarActiveTintColor: '#FFFFFF',
-        tabBarInactiveTintColor: '#8E8E93',
+        tabBarInactiveTintColor: 'rgba(255, 255, 255, 0.3)',
       }}>
       <Tab.Screen
         name="Tasks"
         component={TabMainScreen}
         options={{
           tabBarIcon: ({color}) => (
-            <Icon name="list-outline" size={24} color={color} />
+            <Icon name="document-text-outline" size={28} color={color} />
           ),
         }}
       />
@@ -29,7 +29,7 @@ const TabNavigation = () => {
         component={TabMainScreen}
         options={{
           tabBarIcon: ({color}) => (
-            <Icon name="bookmark-outline" size={24} color={color} />
+            <Icon name="bookmark-outline" size={28} color={color} />
           ),
         }}
       />
@@ -37,10 +37,12 @@ const TabNavigation = () => {
         name="Add"
         component={TabMainScreen}
         options={{
-          tabBarIcon: ({color}) => (
-            <View style={styles.addButton}>
-              <Icon name="add" size={32} color="#FFFFFF" />
-            </View>
+          tabBarIcon: () => (
+            // <View style={styles.addButtonContainer}>
+              <View style={styles.addButton}>
+                <Icon name="add" size={55} color="#FFFFFF" />
+              </View>
+            // </View>
           ),
         }}
       />
@@ -49,7 +51,7 @@ const TabNavigation = () => {
         component={TabMainScreen}
         options={{
           tabBarIcon: ({color}) => (
-            <Icon name="trash-outline" size={24} color={color} />
+            <Icon name="trash-outline" size={28} color={color} />
           ),
         }}
       />
@@ -58,7 +60,7 @@ const TabNavigation = () => {
         component={TabMainScreen}
         options={{
           tabBarIcon: ({color}) => (
-            <Icon name="settings-outline" size={24} color={color} />
+            <Icon name="settings-outline" size={28} color={color} />
           ),
         }}
       />
@@ -72,23 +74,31 @@ const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: '#2D2940',
     borderTopWidth: 0,
-    height: 90,
+    height: 60,
     position: 'absolute',
-    bottom: 20,
-    left: 20,
-    right: 20,
+    bottom: 24,
+    left: 24,
+    right: 24,
     borderRadius: 30,
     elevation: 0,
-    justifyContent:'center',
-    alignItems:'center'
+    paddingHorizontal: 16,
+    paddingTop:10,
+    marginBottom:20
+  },
+  addButtonContainer: {
+    // position: 'absolute',
+    // bottom: 0,
+    // alignItems: 'center',
+    // width: '100%',
   },
   addButton: {
     backgroundColor: '#FF9F0A',
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+    width: 82,
+    height: 82,
+    borderRadius: 26,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 20,
+    borderRadius:50
+  
   },
 });
