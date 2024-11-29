@@ -12,8 +12,7 @@ import {Calendar} from 'react-native-calendars';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useAppContext} from '../../store/context';
 import {useNavigation} from '@react-navigation/native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Octicons from 'react-native-vector-icons/Octicons';
+import MainHeader from '../../component/TabScreenComponents/MainHeader';
 
 const TabNewTaskScreen = () => {
   const navigation = useNavigation();
@@ -22,7 +21,8 @@ const TabNewTaskScreen = () => {
   const [description, setDescription] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [milestones, setMilestones] = useState(['', '', '']);
-  const [activeMilestoneCount, setActiveMilestoneCount] = useState(3);
+  const [activeMilestoneCount, setActiveMilestoneCount] = useState(5);
+  const [showCalendar, setShowCalendar] = useState(false);
 
   const handleSave = async () => {
     const newTask = {
@@ -47,23 +47,59 @@ const TabNewTaskScreen = () => {
     setMilestones([...newMilestones, '']);
   };
 
+  const adjustMilestones = (count) => {
+    setActiveMilestoneCount(count)
+    setMilestones((prev) => {
+      const newMilestones = [...prev]
+      while (newMilestones.length < count) {
+        newMilestones.push('')
+      }
+      return newMilestones.slice(0, count)
+    })
+  }
+
+  const CalendarModal = () => {
+    if (!showCalendar) return null;
+
+    return (
+      <View style={styles.modalContainer}>
+        <View style={styles.modalContent}>
+          <Calendar
+            onDayPress={day => {
+              setSelectedDate(day.dateString);
+              setShowCalendar(false);
+            }}
+            markedDates={{
+              [selectedDate]: {selected: true, selectedColor: '#6F4D7B'},
+            }}
+            theme={{
+              backgroundColor: '#3D2748',
+              calendarBackground: '#3D2748',
+              textSectionTitleColor: '#FFFFFF',
+              selectedDayBackgroundColor: '#6F4D7B',
+              selectedDayTextColor: '#FFFFFF',
+              todayTextColor: '#FF9F0A',
+              dayTextColor: '#FFFFFF',
+              textDisabledColor: '#666666',
+              monthTextColor: '#FFFFFF',
+            }}
+          />
+          <TouchableOpacity
+            style={styles.closeButton}
+            onPress={() => setShowCalendar(false)}>
+            <Text style={styles.closeButtonText}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={{flex: 1, paddingHorizontal: 16}}>
+      <CalendarModal />
+      <ScrollView style={styles.container}>
         {/* Header */}
-        <View style={styles.header}>
-        <TouchableOpacity style={styles.iconButton}>
-          <AntDesign name="back" size={28} color="#FFFFFF" />
-        </TouchableOpacity>
-        <View style={styles.titleContainer}>
-          <Text style={styles.headerTitle}>Your Goals</Text>
-        </View>
-        <TouchableOpacity style={styles.iconButton}>
-          <Octicons name="graph" size={28} color="#FFFFFF" />
-        </TouchableOpacity>
-      </View>
+        <MainHeader />
 
         {/* Details Section */}
         <View style={styles.section}>
@@ -77,7 +113,9 @@ const TabNewTaskScreen = () => {
             onChangeText={setTitle}
           />
 
-          <TouchableOpacity style={styles.dateInput}>
+          <TouchableOpacity
+            style={styles.dateInput}
+            onPress={() => setShowCalendar(true)}>
             <Text style={styles.dateText}>{selectedDate || 'Select date'}</Text>
             <Icon name="calendar-outline" size={24} color="#FFFFFF" />
           </TouchableOpacity>
@@ -102,7 +140,7 @@ const TabNewTaskScreen = () => {
                 styles.countButton,
                 activeMilestoneCount === 1 && styles.activeCount,
               ]}
-              onPress={() => setActiveMilestoneCount(1)}>
+              onPress={() => adjustMilestones(1)}>
               <Text style={styles.countText}>1 milestone</Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -110,7 +148,7 @@ const TabNewTaskScreen = () => {
                 styles.countButton,
                 activeMilestoneCount === 3 && styles.activeCount,
               ]}
-              onPress={() => setActiveMilestoneCount(3)}>
+              onPress={() => adjustMilestones(3)}>
               <Text style={styles.countText}>3 milestones</Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -118,7 +156,7 @@ const TabNewTaskScreen = () => {
                 styles.countButton,
                 activeMilestoneCount === 5 && styles.activeCount,
               ]}
-              onPress={() => setActiveMilestoneCount(5)}>
+              onPress={() => adjustMilestones(5)}>
               <Text style={styles.countText}>5 milestones</Text>
             </TouchableOpacity>
           </View>
@@ -144,6 +182,7 @@ const TabNewTaskScreen = () => {
           <Text style={styles.saveButtonText}>Save</Text>
         </TouchableOpacity>
       </ScrollView>
+      <View style={{height: 100}}></View>
     </SafeAreaView>
   );
 };
@@ -153,14 +192,14 @@ export default TabNewTaskScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1E1B2E',
+    backgroundColor: '#2C1338',
     padding: 16,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // marginBottom: 24,
+    marginBottom: 24,
   },
   headerTitle: {
     color: '#FFFFFF',
@@ -240,5 +279,33 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
+  },
+  modalContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1000,
+  },
+  modalContent: {
+    backgroundColor: '#3D2748',
+    borderRadius: 8,
+    padding: 16,
+    width: '90%',
+  },
+  closeButton: {
+    backgroundColor: '#6F4D7B',
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  closeButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
   },
 });
