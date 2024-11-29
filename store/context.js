@@ -7,7 +7,12 @@ import {
   modifyTask,
 } from './utils';
 
-const CreateContext = createContext({});
+const CreateContext = createContext({
+  allTasks: [],
+  addTask: () => {},
+  deleteTask: () => {},
+  updateTask: () => {},
+});
 
 export const AppContext = ({children}) => {
   const [allTasks, setAllTasks] = useState([]);
