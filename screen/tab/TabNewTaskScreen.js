@@ -8,11 +8,11 @@ import {
   SafeAreaView,
 } from 'react-native';
 import React, {useState} from 'react';
-import {Calendar} from 'react-native-calendars';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useAppContext} from '../../store/context';
 import {useNavigation} from '@react-navigation/native';
 import MainHeader from '../../component/TabScreenComponents/MainHeader';
+import CalendarModal from '../../component/TabNewTaskComponent/CalendarModal';
 
 const TabNewTaskScreen = () => {
   const navigation = useNavigation();
@@ -58,45 +58,16 @@ const TabNewTaskScreen = () => {
     })
   }
 
-  const CalendarModal = () => {
-    if (!showCalendar) return null;
-
-    return (
-      <View style={styles.modalContainer}>
-        <View style={styles.modalContent}>
-          <Calendar
-            onDayPress={day => {
-              setSelectedDate(day.dateString);
-              setShowCalendar(false);
-            }}
-            markedDates={{
-              [selectedDate]: {selected: true, selectedColor: '#6F4D7B'},
-            }}
-            theme={{
-              backgroundColor: '#3D2748',
-              calendarBackground: '#3D2748',
-              textSectionTitleColor: '#FFFFFF',
-              selectedDayBackgroundColor: '#6F4D7B',
-              selectedDayTextColor: '#FFFFFF',
-              todayTextColor: '#FF9F0A',
-              dayTextColor: '#FFFFFF',
-              textDisabledColor: '#666666',
-              monthTextColor: '#FFFFFF',
-            }}
-          />
-          <TouchableOpacity
-            style={styles.closeButton}
-            onPress={() => setShowCalendar(false)}>
-            <Text style={styles.closeButtonText}>Close</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <CalendarModal />
+      <CalendarModal 
+        visible={showCalendar}
+        onClose={() => setShowCalendar(false)}
+        onSelectDate={setSelectedDate}
+        selectedDate={selectedDate}
+      />
+
       <ScrollView style={styles.container}>
         {/* Header */}
         <MainHeader />
@@ -170,7 +141,9 @@ const TabNewTaskScreen = () => {
                 value={milestone}
                 onChangeText={text => updateMilestone(text, index)}
               />
-              <TouchableOpacity onPress={() => deleteMilestone(index)}>
+              <TouchableOpacity
+                onPress={() => deleteMilestone(index)}
+                style={styles.deleteButton}>
                 <Icon name="trash-outline" size={24} color="#FFFFFF" />
               </TouchableOpacity>
             </View>
@@ -240,6 +213,14 @@ const styles = StyleSheet.create({
   milestoneCounter: {
     flexDirection: 'row',
     marginBottom: 16,
+    backgroundColor: '#6F4D7B' + 50,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#6F4D7B',
   },
   countButton: {
     paddingVertical: 8,
@@ -247,12 +228,18 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginRight: 8,
     backgroundColor: '#3D2748',
+    
   },
   activeCount: {
     backgroundColor: '#6F4D7B',
+    fontWeight: '600',
+    fontSize: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   countText: {
     color: '#FFFFFF',
+    fontSize: 14,
   },
   milestoneRow: {
     flexDirection: 'row',
@@ -307,5 +294,10 @@ const styles = StyleSheet.create({
   closeButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
+  },
+  deleteButton: {
+    backgroundColor: '#6F4D7B',
+    padding: 12,
+    borderRadius: 8,
   },
 });
