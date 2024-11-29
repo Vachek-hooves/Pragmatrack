@@ -1,4 +1,5 @@
 import TabMainScreen from './TabMainScreen';
 import TabNewTaskScreen from './TabNewTaskScreen';
+import TabArchivedTasksScreen from './TabArchivedTasksScreen';
 
-export {TabMainScreen, TabNewTaskScreen};
+export {TabMainScreen, TabNewTaskScreen, TabArchivedTasksScreen};

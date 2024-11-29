@@ -5,10 +5,13 @@ import {
   createNewTask,
   removeTask,
   modifyTask,
+  saveArchivedTasksToStorage,
+  loadArchivedTasksFromStorage,
 } from './utils';
 
 const CreateContext = createContext({
   allTasks: [],
+  archivedTasks: [],
   addTask: () => {},
   deleteTask: () => {},
   updateTask: () => {},
@@ -16,11 +19,14 @@ const CreateContext = createContext({
 
 export const AppContext = ({children}) => {
   const [allTasks, setAllTasks] = useState([]);
+  const [archivedTasks, setArchivedTasks] = useState([]);
 
   useEffect(() => {
     const initializeTasks = async () => {
       const tasks = await loadTasksFromStorage();
       setAllTasks(tasks);
+      const archivedTasks = await loadArchivedTasksFromStorage();
+      setArchivedTasks(archivedTasks);
     };
     initializeTasks();
   }, []);
@@ -31,10 +37,20 @@ export const AppContext = ({children}) => {
     await saveTasksToStorage(updatedTasks);
   };
 
-  const deleteTask = async taskId => {
+  const deleteTask = async (taskId) => {
+    // Find the task to archive
+    const taskToArchive = allTasks.find(task => task.id === taskId);
+    if (!taskToArchive) return;
+
+    // Remove from active tasks
     const updatedTasks = removeTask(taskId, allTasks);
     setAllTasks(updatedTasks);
     await saveTasksToStorage(updatedTasks);
+
+    // Add to archived tasks
+    const updatedArchivedTasks = [{...taskToArchive, archivedAt: new Date().toISOString()},...archivedTasks ];
+    setArchivedTasks(updatedArchivedTasks);
+    await saveArchivedTasksToStorage(updatedArchivedTasks);
   };
 
   const updateTask = async (taskId, updatedData) => {
@@ -43,7 +59,8 @@ export const AppContext = ({children}) => {
     await saveTasksToStorage(updatedTasks);
   };
 
-  const value = {
+  const value = { 
+    archivedTasks,
     allTasks,
     addTask,
     deleteTask,

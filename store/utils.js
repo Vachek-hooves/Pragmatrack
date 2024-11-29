@@ -11,11 +11,30 @@ export const loadTasksFromStorage = async () => {
   }
 };
 
+export const loadArchivedTasksFromStorage = async () => {
+  try {
+    const savedArchivedTasks = await AsyncStorage.getItem('archivedTasks');
+    return savedArchivedTasks ? JSON.parse(savedArchivedTasks) : [];
+  } catch (error) {
+    console.error('Error loading archived tasks:', error);
+    return [];
+  }
+};
+
 export const saveTasksToStorage = async tasks => {
   try {
     await AsyncStorage.setItem('tasks', JSON.stringify(tasks));
   } catch (error) {
     console.error('Error saving tasks:', error);
+    throw error;
+  }
+};
+
+export const saveArchivedTasksToStorage = async tasks => {
+  try {
+    await AsyncStorage.setItem('archivedTasks', JSON.stringify(tasks));
+  } catch (error) {
+    console.error('Error saving archived tasks:', error);
     throw error;
   }
 };
@@ -35,6 +54,7 @@ export const createNewTask = (taskData, existingTasks) => {
   };
   return [...existingTasks, newTask];
 };
+
 
 export const removeTask = (taskId, tasks) => {
   return tasks.filter(task => task.id !== taskId);

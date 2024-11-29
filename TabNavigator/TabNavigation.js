@@ -1,7 +1,11 @@
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {TabMainScreen, TabNewTaskScreen} from '../screen/tab';
+import {
+  TabArchivedTasksScreen,
+  TabMainScreen,
+  TabNewTaskScreen,
+} from '../screen/tab';
 
 const Tab = createBottomTabNavigator();
 
@@ -39,17 +43,17 @@ const TabNavigation = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <View style={styles.addButtonContainer}>
-              <Icon 
-                name="add" 
-                size={55} 
-                color="#FFFFFF" 
+              <Icon
+                name="add"
+                size={55}
+                color="#FFFFFF"
                 style={{
                   backgroundColor: '#FF9F0A',
                   width: 82,
                   height: 82,
                   borderRadius: 41,
                   textAlign: 'center',
-                  lineHeight: 82
+                  lineHeight: 82,
                 }}
               />
             </View>
@@ -58,7 +62,7 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name="Delete"
-        component={TabMainScreen}
+        component={TabArchivedTasksScreen}
         options={{
           tabBarIcon: ({color}) => (
             <Icon name="trash-outline" size={28} color={color} />
