@@ -10,7 +10,7 @@ const TabArchivedTasksScreen = () => {
 
   const renderArchivedTasks = () => {
     return archivedTasks.map(task => {
-      return <ArchivedTask archivedTask={task} />;
+      return <ArchivedTask archivedTask={task} key={task.id} />;
     });
   };
   return (

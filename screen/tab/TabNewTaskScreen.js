@@ -68,7 +68,7 @@ const TabNewTaskScreen = ({navigation}) => {
 
       <ScrollView style={styles.container}>
         {/* Header */}
-        <MainHeader />
+        <MainHeader title={'New Task'} />
 
         {/* Details Section */}
         <View style={styles.section}>

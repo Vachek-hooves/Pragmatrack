@@ -16,9 +16,10 @@ const ArchivedTask = ({archivedTask}) => {
         {archivedTask.milestones.map(
           (milestone, index) => (
             console.log(milestone, 'milestone'),
+            console.log(index, 'index'),
             (
               <View
-                key={index + 1}
+                key={`${ milestone.id}`}
                 style={[
                   styles.milestoneIndicator,
                   milestone.done && styles.milestoneDone,
