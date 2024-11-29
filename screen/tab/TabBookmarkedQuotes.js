@@ -1,16 +1,13 @@
 import {StyleSheet, Text, View} from 'react-native';
 import {useAppContext} from '../../store/context';
+import ScrollLayout from '../../component/layout/ScrollLayout';
 
 const TabBookmarkedQuotes = () => {
   const {bookmarkedQuotes} = useAppContext();
   console.log(bookmarkedQuotes);
-  return (
-    <View>
-      <Text>TabBookmarkedQuotes</Text>
-    </View>
-  )
-}
+  return <ScrollLayout title={'Saved Quotes'}></ScrollLayout>;
+};
 
-export default TabBookmarkedQuotes
+export default TabBookmarkedQuotes;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

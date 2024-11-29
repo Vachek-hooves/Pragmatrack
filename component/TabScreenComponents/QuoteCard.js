@@ -22,14 +22,21 @@ const QuoteCard = () => {
         name="quote-right"
         size={28}
         color="gray"
-        style={{paddingBottom: 10}}
+        // style={{paddingBottom: 10}}
       />
-      <Text style={styles.quoteText}>{randomQuote.quote}</Text>
-      <Text style={styles.quoteAuthor}>{randomQuote.person}</Text>
+      <View style={styles.quoteContent}>
+        <Text style={styles.quoteText}>{randomQuote.quote}</Text>
+        <Text style={styles.quoteAuthor}>{randomQuote.person}</Text>
+      </View>
       <TouchableOpacity
         style={styles.bookmarkIcon}
         onPress={() => handleBookmarkQuote(randomQuote)}>
-        <Icon name="bookmark-outline" size={28} color="#FFFFFF" />
+        <Icon
+          name="bookmark-outline"
+          size={28}
+          color="#FFFFFF"
+          
+        />
       </TouchableOpacity>
     </View>
   );
@@ -38,9 +45,13 @@ const QuoteCard = () => {
 export default QuoteCard;
 
 const styles = StyleSheet.create({
+  quoteContent: {
+    height: 120,
+  },
   quoteCard: {
     margin: 16,
-    padding: 20,
+    paddingTop: 10,
+    paddingHorizontal: 20,
     backgroundColor: '#6F4D7B' + 50,
     borderRadius: 16,
     position: 'relative',
@@ -63,6 +74,6 @@ const styles = StyleSheet.create({
     bottom: 16,
     backgroundColor: 'gray',
     borderRadius: '50%',
-    padding: 5,
+    padding: 8,
   },
 });
