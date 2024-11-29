@@ -22,9 +22,9 @@ const ArchivedTask = ({archivedTask}) => {
                 key={`${ milestone.id}`}
                 style={[
                   styles.milestoneIndicator,
-                  milestone.done && styles.milestoneDone,
-                  index === archivedTask.milestones.findIndex(m => !m.done) &&
-                    styles.milestoneActive,
+                //   milestone.done && styles.milestoneDone,
+                //   index === archivedTask.milestones.findIndex(m => !m.done) &&
+                //     styles.milestoneActive,
                 ]}>
                 <Text style={styles.milestoneNumber}>{index + 1}</Text>
               </View>

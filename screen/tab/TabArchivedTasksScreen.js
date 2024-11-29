@@ -1,6 +1,5 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {useAppContext} from '../../store/context';
-// import TaskCard from '../../component/TabMainScreen.js/TaskCard';
 import ScrollLayout from '../../component/layout/ScrollLayout';
 import ArchivedTask from '../../component/TabArchivedTasksScreen/ArchivedTask';
 
