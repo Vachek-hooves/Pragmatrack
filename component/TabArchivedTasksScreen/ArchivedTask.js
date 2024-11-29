@@ -1,63 +1,49 @@
-import {StyleSheet, Text, View, TouchableOpacity, Alert} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {useAppContext} from '../../store/context';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {StyleSheet, Text, View} from 'react-native';
 
-const TaskCard = ({task}) => {
-  const navigation = useNavigation();
-  const {deleteTask} = useAppContext();
-
-  const handleOpenTask = () => {
-    navigation.navigate('StackTaskDetailsScreen', {taskId: task.id});
-  };
-
-  const handleDeleteTask = () => {
-    Alert.alert('Delete Task', 'Are you sure you want to delete this task?', [
-      {text: 'Cancel', style: 'cancel'},
-      {text: 'Delete', onPress: () => deleteTask(task.id)},
-    ]);
-  };
-
+const ArchivedTask = ({archivedTask}) => {
   return (
     <View style={styles.container}>
       {/* Title and Description */}
       <Text style={styles.title} numberOfLines={1}>
-        {task.title}
+        {archivedTask.title}
       </Text>
       <Text style={styles.description} numberOfLines={2}>
-        {task.description}
+        {archivedTask.description}
       </Text>
 
       {/* Milestone Indicators */}
       <View style={styles.milestoneContainer}>
-        {task.milestones.map((milestone, index) => (
-          console.log(milestone, 'milestone'),
-          <View
-            key={index + 1}
-            style={[
-              styles.milestoneIndicator,
-              milestone.done && styles.milestoneDone,
-              index === task.milestones.findIndex(m => !m.done) &&
-                styles.milestoneActive,
-            ]}>
-            <Text style={styles.milestoneNumber}>{index + 1}</Text>
-          </View>
-        ))}
+        {archivedTask.milestones.map(
+          (milestone, index) => (
+            console.log(milestone, 'milestone'),
+            (
+              <View
+                key={index + 1}
+                style={[
+                  styles.milestoneIndicator,
+                  milestone.done && styles.milestoneDone,
+                  index === archivedTask.milestones.findIndex(m => !m.done) &&
+                    styles.milestoneActive,
+                ]}>
+                <Text style={styles.milestoneNumber}>{index + 1}</Text>
+              </View>
+            )
+          ),
+        )}
       </View>
 
       {/* Action Buttons */}
-      <View style={styles.actionContainer}>
-        <TouchableOpacity style={styles.openButton} onPress={handleOpenTask}>
-          <Text style={styles.openButtonText}>Open task</Text>
-        </TouchableOpacity>
 
-        <TouchableOpacity style={styles.iconButton} onPress={handleDeleteTask}>
-          <Icon name="trash-outline" size={20} color="#FFFFFF" />
-        </TouchableOpacity>
+      <View style={styles.actionContainer}>
+        <Text style={styles.openButton}>
+          <Text style={styles.openButtonText}>Archived</Text>
+        </Text>
       </View>
     </View>
   );
 };
+
+export default ArchivedTask;
 
 const styles = StyleSheet.create({
   container: {
@@ -122,6 +108,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
+    textAlign: 'center',
   },
   iconButton: {
     backgroundColor: '#2C1338',
@@ -131,5 +118,3 @@ const styles = StyleSheet.create({
     borderColor: '#6F4D7B',
   },
 });
-
-export default TaskCard;

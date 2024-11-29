@@ -1,15 +1,15 @@
-import {StyleSheet, Text, View,TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Octicons from 'react-native-vector-icons/Octicons';
 
-const MainHeader = () => {
+const MainHeader = ({title}) => {
   return (
     <View style={styles.header}>
       <TouchableOpacity style={styles.iconButton}>
         <AntDesign name="back" size={28} color="#FFFFFF" />
       </TouchableOpacity>
       <View style={styles.titleContainer}>
-        <Text style={styles.headerTitle}>Your Goals</Text>
+        <Text style={styles.headerTitle}>{title}</Text>
       </View>
       <TouchableOpacity style={styles.iconButton}>
         <Octicons name="graph" size={28} color="#FFFFFF" />

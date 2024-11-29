@@ -1,14 +1,22 @@
 import {StyleSheet, Text, View} from 'react-native';
 import {useAppContext} from '../../store/context';
-import TaskCard from '../../component/TabMainScreen.js/TaskCard';
+// import TaskCard from '../../component/TabMainScreen.js/TaskCard';
+import ScrollLayout from '../../component/layout/ScrollLayout';
+import ArchivedTask from '../../component/TabArchivedTasksScreen/ArchivedTask';
 
 const TabArchivedTasksScreen = () => {
   const {archivedTasks} = useAppContext();
-  console.log(archivedTasks,'archived tasks');
+  console.log(archivedTasks, 'archived tasks');
+
+  const renderArchivedTasks = () => {
+    return archivedTasks.map(task => {
+      return <ArchivedTask archivedTask={task} />;
+    });
+  };
   return (
-    <View>
-      <Text>TabArchivedTasksScreen</Text>
-    </View>
+    <ScrollLayout title={'Deleted archive'}>
+      {renderArchivedTasks()}
+    </ScrollLayout>
   );
 };
 

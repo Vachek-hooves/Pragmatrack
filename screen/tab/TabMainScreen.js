@@ -7,7 +7,7 @@ const TabMainScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       {/* Header */}
-      <MainHeader />
+      <MainHeader title={'Your Goals'} />
 
       {/* Quote Card */}
       <QuoteCard />
