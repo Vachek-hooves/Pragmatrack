@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   TextInput,
+  ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useAppContext} from '../../store/context';
@@ -52,6 +53,7 @@ const StackTaskDetailsScreen = ({route}) => {
     <SafeAreaView style={styles.container}>
       {/* Header */}
       <TaskDetailsHeader onPress={handleIsEditing} />
+      <ScrollView>
 
       {/* Title and Description */}
       <View style={styles.section}>
@@ -106,6 +108,7 @@ const StackTaskDetailsScreen = ({route}) => {
           </View>
         ))}
       </View>
+      </ScrollView>
 
       {/* Close/Save Button */}
       <TouchableOpacity
@@ -200,7 +203,9 @@ const styles = StyleSheet.create({
     padding: 16,
     alignItems: 'center',
     marginTop: 'auto',
-    marginBottom: 20,
+    marginBottom: 26,
+    marginHorizontal: 16,
+    marginTop:16
   },
   closeButtonText: {
     color: '#16001E',
