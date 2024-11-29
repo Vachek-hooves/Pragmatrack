@@ -36,17 +36,24 @@ const TabNavigation = () => {
       <Tab.Screen
         name="Add"
         component={TabNewTaskScreen}
-        
         options={{
-          tabBarIcon: () => (
-            // <View style={styles.addButtonContainer}>
-            <TouchableOpacity style={styles.addButton}>
-              <Icon name="add" size={55} color="#FFFFFF" />
-            </TouchableOpacity>
-            // </View>
+          tabBarIcon: ({focused}) => (
+            <View style={styles.addButtonContainer}>
+              <Icon 
+                name="add" 
+                size={55} 
+                color="#FFFFFF" 
+                style={{
+                  backgroundColor: '#FF9F0A',
+                  width: 82,
+                  height: 82,
+                  borderRadius: 41,
+                  textAlign: 'center',
+                  lineHeight: 82
+                }}
+              />
+            </View>
           ),
-          
-          
         }}
       />
       <Tab.Screen
@@ -92,18 +99,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   addButtonContainer: {
-    // position: 'absolute',
-    // bottom: 0,
-    // alignItems: 'center',
-    // width: '100%',
-  },
-  addButton: {
-    backgroundColor: '#FF9F0A',
-    width: 82,
-    height: 82,
-    borderRadius: 26,
-    justifyContent: 'center',
+    position: 'absolute',
     alignItems: 'center',
-    borderRadius: 50,
+    justifyContent: 'center',
   },
 });
