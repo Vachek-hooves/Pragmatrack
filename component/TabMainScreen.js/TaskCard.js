@@ -1,13 +1,20 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { StyleSheet, Text, View, TouchableOpacity,Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import Icon from 'react-native-vector-icons/Ionicons';
+import { useAppContext } from '../../store/context';
 const TaskCard = ({ task }) => {
   const navigation = useNavigation();
+  const { deleteTask } = useAppContext();
 
   const handleOpenTask = () => {
     navigation.navigate('StackTaskDetailsScreen', { taskId: task.id });
+  };
+
+  const handleDeleteTask = () => {
+    Alert.alert('Delete Task', 'Are you sure you want to delete this task?', [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Delete', onPress: () => deleteTask(task.id) },
+    ]);
   };
 
   return (
@@ -46,11 +53,7 @@ const TaskCard = ({ task }) => {
           <Text style={styles.openButtonText}>Open task</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.iconButton}>
-          <Icon name="pencil-outline" size={20} color="#FFFFFF" />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.iconButton}>
+        <TouchableOpacity style={styles.iconButton} onPress={handleDeleteTask}>
           <Icon name="trash-outline" size={20} color="#FFFFFF" />
         </TouchableOpacity>
       </View>
