@@ -1,7 +1,7 @@
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import TabMainScreen from '../screen/tab/TabMainScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {TabMainScreen, TabNewTaskScreen} from '../screen/tab';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,7 +35,8 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name="Add"
-        component={TabMainScreen}
+        component={TabNewTaskScreen}
+        
         options={{
           tabBarIcon: () => (
             // <View style={styles.addButtonContainer}>
@@ -44,6 +45,8 @@ const TabNavigation = () => {
             </TouchableOpacity>
             // </View>
           ),
+          
+          
         }}
       />
       <Tab.Screen
@@ -85,9 +88,8 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor:'#6F4D7B',
-    marginHorizontal:16,
-   
+    borderColor: '#6F4D7B',
+    marginHorizontal: 16,
   },
   addButtonContainer: {
     // position: 'absolute',
