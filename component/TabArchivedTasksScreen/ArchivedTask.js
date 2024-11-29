@@ -15,8 +15,7 @@ const ArchivedTask = ({archivedTask}) => {
       <View style={styles.milestoneContainer}>
         {archivedTask.milestones.map(
           (milestone, index) => (
-            console.log(milestone, 'milestone'),
-            console.log(index, 'index'),
+           
             (
               <View
                 key={`${ milestone.id}`}

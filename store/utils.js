@@ -21,6 +21,16 @@ export const loadArchivedTasksFromStorage = async () => {
   }
 };
 
+export const loadBookmarkedQuotesFromStorage = async () => {
+  try {
+    const savedBookmarkedQuotes = await AsyncStorage.getItem('bookmarkedQuotes');
+    return savedBookmarkedQuotes ? JSON.parse(savedBookmarkedQuotes) : [];
+  } catch (error) {
+    console.error('Error loading bookmarked quotes:', error);
+    return [];
+  }
+};
+
 export const saveTasksToStorage = async tasks => {
   try {
     await AsyncStorage.setItem('tasks', JSON.stringify(tasks));
@@ -55,9 +65,17 @@ export const createNewTask = (taskData, existingTasks) => {
   return [...existingTasks, newTask];
 };
 
-
 export const removeTask = (taskId, tasks) => {
   return tasks.filter(task => task.id !== taskId);
+};
+
+export const saveBookmarkedQuotesToStorage = async quotes => {
+  try {
+    await AsyncStorage.setItem('bookmarkedQuotes', JSON.stringify(quotes));
+  } catch (error) {
+    console.error('Error saving bookmarked quotes:', error);
+    throw error;
+  }
 };
 
 export const modifyTask = (taskId, updatedData, tasks) => {

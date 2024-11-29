@@ -7,6 +7,8 @@ import {
   modifyTask,
   saveArchivedTasksToStorage,
   loadArchivedTasksFromStorage,
+  loadBookmarkedQuotesFromStorage,
+  saveBookmarkedQuotesToStorage,
 } from './utils';
 
 const CreateContext = createContext({
@@ -15,11 +17,14 @@ const CreateContext = createContext({
   addTask: () => {},
   deleteTask: () => {},
   updateTask: () => {},
+  saveBookmarkedQuote: () => {},
 });
+
 
 export const AppContext = ({children}) => {
   const [allTasks, setAllTasks] = useState([]);
   const [archivedTasks, setArchivedTasks] = useState([]);
+  const [bookmarkedQuotes, setBookmarkedQuotes] = useState([]);
 
   useEffect(() => {
     const initializeTasks = async () => {
@@ -27,6 +32,8 @@ export const AppContext = ({children}) => {
       setAllTasks(tasks);
       const archivedTasks = await loadArchivedTasksFromStorage();
       setArchivedTasks(archivedTasks);
+      const bookmarkedQuotes = await loadBookmarkedQuotesFromStorage();
+      setBookmarkedQuotes(bookmarkedQuotes);
     };
     initializeTasks();
   }, []);
@@ -59,12 +66,23 @@ export const AppContext = ({children}) => {
     await saveTasksToStorage(updatedTasks);
   };
 
+  const saveBookmarkedQuote = async (quote) => {
+    // console.log('save bookmarked quote', quote);
+    const updatedBookmarkedQuotes=[...bookmarkedQuotes,quote]
+    setBookmarkedQuotes(updatedBookmarkedQuotes);
+    await saveBookmarkedQuotesToStorage(updatedBookmarkedQuotes);
+  }
+
+  
+
   const value = { 
     archivedTasks,
     allTasks,
+    bookmarkedQuotes,
     addTask,
     deleteTask,
     updateTask,
+    saveBookmarkedQuote,
   };
   return (
     <CreateContext.Provider value={value}>{children}</CreateContext.Provider>

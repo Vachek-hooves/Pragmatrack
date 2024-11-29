@@ -31,7 +31,7 @@ const TaskCard = ({task}) => {
       {/* Milestone Indicators */}
       <View style={styles.milestoneContainer}>
         {task.milestones.map((milestone, index) => (
-          console.log(milestone, 'milestone'),
+         
           <View
             key={index + 1}
             style={[

@@ -11,7 +11,7 @@ import TaskCard from '../TabMainScreen.js/TaskCard';
 
 const TaskContainer = () => {
   const {allTasks} = useAppContext();
-  console.log(allTasks);
+ 
 
   const ExsitedTasks = () => (
     <ScrollView style={styles.container}>

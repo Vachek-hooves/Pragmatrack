@@ -5,6 +5,7 @@ import {
   TabArchivedTasksScreen,
   TabMainScreen,
   TabNewTaskScreen,
+  TabBookmarkedQuotes,
 } from '../screen/tab';
 
 const Tab = createBottomTabNavigator();
@@ -30,7 +31,7 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name="Bookmarks"
-        component={TabMainScreen}
+        component={TabBookmarkedQuotes}
         options={{
           tabBarIcon: ({color}) => (
             <Icon name="bookmark-outline" size={28} color={color} />

@@ -5,7 +5,7 @@ import ArchivedTask from '../../component/TabArchivedTasksScreen/ArchivedTask';
 
 const TabArchivedTasksScreen = () => {
   const {archivedTasks} = useAppContext();
-  console.log(archivedTasks, 'archived tasks');
+  // console.log(archivedTasks, 'archived tasks');
 
   const renderArchivedTasks = () => {
     return archivedTasks.map(task => {

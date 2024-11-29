@@ -3,6 +3,7 @@ import MainHeader from '../../component/TabScreenComponents/MainHeader';
 import QuoteCard from '../../component/TabScreenComponents/QuoteCard';
 import TaskContainer from '../../component/TabScreenComponents/TaskContainer';
 
+
 const TabMainScreen = () => {
   return (
     <SafeAreaView style={styles.container}>

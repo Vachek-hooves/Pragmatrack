@@ -2,12 +2,20 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useAppContext} from '../../store/context';
+import { QUOTES } from '../../data/quotes';
+
 
 const QuoteCard = () => {
+  const {saveBookmarkedQuote} = useAppContext();
 
-  const handleBookmark = () => {
-    console.log('bookmark');
+  const handleBookmarkQuote = quote => {
+    saveBookmarkedQuote(quote);
   };
+
+  const randomQuote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+  // console.log(Math.floor(Math.random() * QUOTES.length));
+  // console.log(randomQuote);
+
   return (
     <View style={styles.quoteCard}>
       <FontAwesome
@@ -16,11 +24,11 @@ const QuoteCard = () => {
         color="gray"
         style={{paddingBottom: 10}}
       />
-      <Text style={styles.quoteText}>
-        "The way to get started is to quit talking and begin doing."
-      </Text>
-      <Text style={styles.quoteAuthor}>- Walt Disney</Text>
-      <TouchableOpacity style={styles.bookmarkIcon} onPress={handleBookmark}>
+      <Text style={styles.quoteText}>{randomQuote.quote}</Text>
+      <Text style={styles.quoteAuthor}>{randomQuote.person}</Text>
+      <TouchableOpacity
+        style={styles.bookmarkIcon}
+        onPress={() => handleBookmarkQuote(randomQuote)}>
         <Icon name="bookmark-outline" size={28} color="#FFFFFF" />
       </TouchableOpacity>
     </View>
