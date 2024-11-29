@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import TabMainScreen from '../screen/tab/TabMainScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -39,9 +39,9 @@ const TabNavigation = () => {
         options={{
           tabBarIcon: () => (
             // <View style={styles.addButtonContainer}>
-            <View style={styles.addButton}>
+            <TouchableOpacity style={styles.addButton}>
               <Icon name="add" size={55} color="#FFFFFF" />
-            </View>
+            </TouchableOpacity>
             // </View>
           ),
         }}
@@ -77,15 +77,16 @@ const styles = StyleSheet.create({
     height: 70,
     position: 'absolute',
     bottom: 20,
-    left: 24,
-    right: 24,
+    // left: 24,
+    // right: 24,
     borderRadius: 30,
     elevation: 0,
     // paddingHorizontal: 16,
     paddingTop: 10,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor:'#6F4D7B'
+    borderColor:'#6F4D7B',
+    marginHorizontal:16,
    
   },
   addButtonContainer: {
