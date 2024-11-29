@@ -24,7 +24,7 @@ export default TabMainScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1E1B2E',
+    backgroundColor: '#16001E',
   },
   quoteNumber: {
     color: '#FFFFFF',

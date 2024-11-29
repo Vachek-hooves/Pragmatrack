@@ -47,21 +47,20 @@ const TabNewTaskScreen = () => {
     setMilestones([...newMilestones, '']);
   };
 
-  const adjustMilestones = (count) => {
-    setActiveMilestoneCount(count)
-    setMilestones((prev) => {
-      const newMilestones = [...prev]
+  const adjustMilestones = count => {
+    setActiveMilestoneCount(count);
+    setMilestones(prev => {
+      const newMilestones = [...prev];
       while (newMilestones.length < count) {
-        newMilestones.push('')
+        newMilestones.push('');
       }
-      return newMilestones.slice(0, count)
-    })
-  }
-
+      return newMilestones.slice(0, count);
+    });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <CalendarModal 
+      <CalendarModal
         visible={showCalendar}
         onClose={() => setShowCalendar(false)}
         onSelectDate={setSelectedDate}
@@ -165,7 +164,7 @@ export default TabNewTaskScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2C1338',
+    backgroundColor: '#16001E',
     padding: 16,
   },
   header: {
@@ -188,24 +187,28 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   input: {
-    backgroundColor: '#3D2748',
+    backgroundColor: '#6F4D7B' + 50,
     borderRadius: 8,
     padding: 16,
     color: '#FFFFFF',
     marginBottom: 12,
+    borderWidth:1,
+    borderColor: '#6F4D7B',
   },
   textArea: {
     height: 120,
     textAlignVertical: 'top',
   },
   dateInput: {
-    backgroundColor: '#3D2748',
+    backgroundColor: '#6F4D7B' + 50,
     borderRadius: 8,
     padding: 16,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 12,
+    borderWidth:1,
+    borderColor: '#6F4D7B',
   },
   dateText: {
     color: '#FFFFFF',
@@ -227,8 +230,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 20,
     marginRight: 8,
-    backgroundColor: '#3D2748',
-    
+    backgroundColor: '#6F4D7B' + 50,
   },
   activeCount: {
     backgroundColor: '#6F4D7B',
@@ -248,23 +250,26 @@ const styles = StyleSheet.create({
   },
   milestoneInput: {
     flex: 1,
-    backgroundColor: '#3D2748',
+    backgroundColor: '#6F4D7B' + 50,
     borderRadius: 8,
     padding: 16,
     color: '#FFFFFF',
     marginRight: 12,
+    borderWidth:1,
+    borderColor: '#6F4D7B',
   },
   saveButton: {
-    backgroundColor: '#6F4D7B',
+    backgroundColor: '#fff',
     borderRadius: 8,
     padding: 16,
     alignItems: 'center',
     marginTop: 24,
     marginBottom: 40,
+    borderWidth: 1,
   },
   saveButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
+    color: 'gray',
+    fontSize: 20,
     fontWeight: '600',
   },
   modalContainer: {

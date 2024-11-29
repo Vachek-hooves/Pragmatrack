@@ -60,6 +60,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 16,
+    borderWidth:1,
+    borderColor: '#6F4D7B',
   },
   closeButtonText: {
     color: '#FFFFFF',
