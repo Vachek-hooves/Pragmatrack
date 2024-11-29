@@ -23,8 +23,9 @@ const TaskCard = ({ task }) => {
       {/* Milestone Indicators */}
       <View style={styles.milestoneContainer}>
         {task.milestones.map((milestone, index) => (
+       
           <View 
-            key={milestone.id} 
+            key={index} 
             style={[
               styles.milestoneIndicator,
               milestone.done && styles.milestoneDone,
