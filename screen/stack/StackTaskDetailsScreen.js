@@ -98,8 +98,8 @@ const StackTaskDetailsScreen = ({route}) => {
               ]}
               onPress={() => handleMilestoneToggle(milestone.id)}>
               <Icon
-                name={milestone.done ? 'checkmark' : 'checkmark-outline'}
-                size={24}
+                name={milestone.done ? 'checkmark-done-outline' : 'checkmark-outline'}
+                size={28}
                 color="#FFFFFF"
               />
             </TouchableOpacity>
