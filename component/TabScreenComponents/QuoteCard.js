@@ -1,20 +1,21 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {useAppContext} from '../../store/context';
+import {QUOTES} from '../../data/quotes';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useAppContext} from '../../store/context';
-import { QUOTES } from '../../data/quotes';
-
 
 const QuoteCard = () => {
-  const {saveBookmarkedQuote} = useAppContext();
+  const {saveBookmarkedQuote, bookmarkedQuotes} = useAppContext();
 
   const handleBookmarkQuote = quote => {
     saveBookmarkedQuote(quote);
   };
 
   const randomQuote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
-  // console.log(Math.floor(Math.random() * QUOTES.length));
-  // console.log(randomQuote);
+  const isBookmarked = bookmarkedQuotes.some(
+    quote => quote.id === randomQuote.id,
+  );
+  console.log(isBookmarked, 'this quote is bookmarked');
 
   return (
     <View style={styles.quoteCard}>
@@ -22,7 +23,6 @@ const QuoteCard = () => {
         name="quote-right"
         size={28}
         color="gray"
-        // style={{paddingBottom: 10}}
       />
       <View style={styles.quoteContent}>
         <Text style={styles.quoteText}>{randomQuote.quote}</Text>
@@ -34,8 +34,7 @@ const QuoteCard = () => {
         <Icon
           name="bookmark-outline"
           size={28}
-          color="#FFFFFF"
-          
+          color={isBookmarked ? 'green' : '#fff'}
         />
       </TouchableOpacity>
     </View>

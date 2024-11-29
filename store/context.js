@@ -18,6 +18,7 @@ const CreateContext = createContext({
   deleteTask: () => {},
   updateTask: () => {},
   saveBookmarkedQuote: () => {},
+  removeBookmarkedQuote: () => {},
 });
 
 
@@ -72,6 +73,11 @@ export const AppContext = ({children}) => {
     setBookmarkedQuotes(updatedBookmarkedQuotes);
     await saveBookmarkedQuotesToStorage(updatedBookmarkedQuotes);
   }
+  const removeBookmarkedQuote=async(quote)=>{
+    const updatedBookmarkedQuotes=bookmarkedQuotes.filter(bookmarked=>bookmarked.id!==quote.id)
+    setBookmarkedQuotes(updatedBookmarkedQuotes);
+    await saveBookmarkedQuotesToStorage(updatedBookmarkedQuotes);
+  }
 
   
 
@@ -83,6 +89,7 @@ export const AppContext = ({children}) => {
     deleteTask,
     updateTask,
     saveBookmarkedQuote,
+    removeBookmarkedQuote
   };
   return (
     <CreateContext.Provider value={value}>{children}</CreateContext.Provider>
