@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, TouchableOpacity,Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { useAppContext } from '../../store/context';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 const TaskCard = ({ task }) => {
   const navigation = useNavigation();
   const { deleteTask } = useAppContext();

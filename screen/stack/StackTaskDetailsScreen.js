@@ -10,11 +10,11 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useAppContext} from '../../store/context';
-import {useNavigation} from '@react-navigation/native';
+// import {useNavigation} from '@react-navigation/native';
 import TaskDetailsHeader from '../../component/StackTaskDetailsComponents/TaskDetailsHeader';
 
-const StackTaskDetailsScreen = ({route}) => {
-  const navigation = useNavigation();
+const StackTaskDetailsScreen = ({route,navigation}) => {
+//   const navigation = useNavigation();
   const {allTasks, updateTask} = useAppContext();
   const {taskId} = route.params;
 

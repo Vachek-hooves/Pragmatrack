@@ -10,12 +10,12 @@ import {
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useAppContext} from '../../store/context';
-import {useNavigation} from '@react-navigation/native';
+// import {useNavigation} from '@react-navigation/native';
 import MainHeader from '../../component/TabScreenComponents/MainHeader';
 import CalendarModal from '../../component/TabNewTaskComponent/CalendarModal';
 
-const TabNewTaskScreen = () => {
-  const navigation = useNavigation();
+const TabNewTaskScreen = ({navigation}) => {
+  // const navigation = useNavigation();
   const {addTask} = useAppContext();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -31,7 +31,6 @@ const TabNewTaskScreen = () => {
       dueDate: selectedDate,
       milestones: milestones.filter(m => m !== ''),
     };
-
     await addTask(newTask);
     navigation.goBack();
   };
