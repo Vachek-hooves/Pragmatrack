@@ -1,8 +1,13 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useAppContext} from '../../store/context';
 
 const QuoteCard = () => {
+
+  const handleBookmark = () => {
+    console.log('bookmark');
+  };
   return (
     <View style={styles.quoteCard}>
       <FontAwesome
@@ -15,7 +20,7 @@ const QuoteCard = () => {
         "The way to get started is to quit talking and begin doing."
       </Text>
       <Text style={styles.quoteAuthor}>- Walt Disney</Text>
-      <TouchableOpacity style={styles.bookmarkIcon}>
+      <TouchableOpacity style={styles.bookmarkIcon} onPress={handleBookmark}>
         <Icon name="bookmark-outline" size={28} color="#FFFFFF" />
       </TouchableOpacity>
     </View>
