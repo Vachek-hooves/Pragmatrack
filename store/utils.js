@@ -25,6 +25,11 @@ export const createNewTask = (taskData, existingTasks) => {
   const newTask = {
     id: Date.now().toString(),
     ...taskData,
+    milestones: taskData.milestones.map(milestone => ({
+      id: Date.now().toString() + Math.random(),
+      title: milestone,
+      done: false
+    })),
     createdAt: new Date().toISOString(),
     completed: false,
   };

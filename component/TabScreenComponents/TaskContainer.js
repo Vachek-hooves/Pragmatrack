@@ -7,23 +7,39 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useAppContext} from '../../store/context';
+import TaskCard from '../TabMainScreen.js/TaskCard';
 
 const TaskContainer = () => {
   const {allTasks} = useAppContext();
   console.log(allTasks);
+
+  const ExsitedTasks = () => (
+    <ScrollView style={styles.container}>
+      {allTasks.map(task => (
+        <TaskCard key={task.id} task={task} />
+      ))}
+    </ScrollView>
+  );
+
+  const NoTasks = () => {
+    return (
+      <View style={styles.emptyStateContainer}>
+        <TouchableOpacity style={styles.emptyStateTextContainer}>
+          <Icon name="add" size={42} color="#FFFFFF" />
+        </TouchableOpacity>
+        <Text style={styles.emptyStateText}>
+          There are no tasks here right now
+        </Text>
+        <Text style={styles.addTaskText}>Tap "+" to add the new one</Text>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.taskContainer}>
-      <ScrollView style={{flex: 1}}>
+      <ScrollView style={{flex: 1, padding: 10}}>
         {/* Empty State */}
-        <View style={styles.emptyStateContainer}>
-          <TouchableOpacity style={styles.emptyStateTextContainer}>
-            <Icon name="add" size={42} color="#FFFFFF" />
-          </TouchableOpacity>
-          <Text style={styles.emptyStateText}>
-            There are no tasks here right now
-          </Text>
-          <Text style={styles.addTaskText}>Tap "+" to add the new one</Text>
-        </View>
+        {allTasks.length === 0 ? <NoTasks /> : <ExsitedTasks />}
       </ScrollView>
     </View>
   );
