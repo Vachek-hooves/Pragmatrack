@@ -30,6 +30,7 @@ const TabNewTaskScreen = ({navigation}) => {
       description,
       dueDate: selectedDate,
       milestones: milestones.filter(m => m !== ''),
+      completed: false,
     };
     await addTask(newTask);
     navigation.goBack();

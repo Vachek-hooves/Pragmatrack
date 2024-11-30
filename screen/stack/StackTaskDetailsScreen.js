@@ -12,11 +12,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {useAppContext} from '../../store/context';
 // import {useNavigation} from '@react-navigation/native';
 import TaskDetailsHeader from '../../component/StackTaskDetailsComponents/TaskDetailsHeader';
+import CloseTaskBtn from '../../component/StackTaskDetailsComponents/CloseTaskBtn';
+import TaskSaveCloseBtn from '../../component/StackTaskDetailsComponents/TaskSaveCloseBtn';
 
-const StackTaskDetailsScreen = ({route,navigation}) => {
-//   const navigation = useNavigation();
+const StackTaskDetailsScreen = ({route, navigation}) => {
+  //   const navigation = useNavigation();
   const {allTasks, updateTask} = useAppContext();
   const {taskId} = route.params;
+  console.log(allTasks[0].milestones);
 
   // Find the current task
   const task = allTasks.find(task => task.id === taskId);
@@ -26,6 +29,8 @@ const StackTaskDetailsScreen = ({route,navigation}) => {
   const [editedDescription, setEditedDescription] = useState(task?.description);
 
   if (!task) return null;
+
+  const isTaskCompleted = task.milestones.every(milestone => milestone.done);
 
   const handleMilestoneToggle = async milestoneId => {
     const updatedMilestones = task.milestones.map(milestone =>
@@ -54,70 +59,78 @@ const StackTaskDetailsScreen = ({route,navigation}) => {
       {/* Header */}
       <TaskDetailsHeader onPress={handleIsEditing} />
       <ScrollView>
-
-      {/* Title and Description */}
-      <View style={styles.section}>
-        {isEditing ? (
-          <TextInput
-            style={styles.titleInput}
-            value={editedTitle}
-            onChangeText={setEditedTitle}
-            placeholderTextColor="rgba(255, 255, 255, 0.5)"
-          />
-        ) : (
-          <Text style={styles.title}>{task.title}</Text>
-        )}
-
-        <Text style={styles.date}>{task.dueDate}</Text>
-
-        {isEditing ? (
-          <TextInput
-            style={styles.descriptionInput}
-            value={editedDescription}
-            onChangeText={setEditedDescription}
-            multiline
-            placeholderTextColor="rgba(255, 255, 255, 0.5)"
-          />
-        ) : (
-          <Text style={styles.description}>{task.description}</Text>
-        )}
-      </View>
-
-      {/* Milestones */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Milestones</Text>
-        {task.milestones.map((milestone, index) => (
-          <View key={index} style={styles.milestoneRow}>
+        {/* Title and Description */}
+        <View style={styles.section}>
+          {isEditing ? (
             <TextInput
-              style={styles.milestoneInput}
-              value={milestone.title}
-              editable={false}
+              style={styles.titleInput}
+              value={editedTitle}
+              onChangeText={setEditedTitle}
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
             />
-            <TouchableOpacity
-              style={[
-                styles.checkButton,
-                milestone.done && styles.checkButtonActive,
-              ]}
-              onPress={() => handleMilestoneToggle(milestone.id)}>
-              <Icon
-                name={milestone.done ? 'checkmark-done-outline' : 'checkmark-outline'}
-                size={28}
-                color="#FFFFFF"
+          ) : (
+            <Text style={styles.title}>{task.title}</Text>
+          )}
+
+          <Text style={styles.date}>{task.dueDate}</Text>
+
+          {isEditing ? (
+            <TextInput
+              style={styles.descriptionInput}
+              value={editedDescription}
+              onChangeText={setEditedDescription}
+              multiline
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
+            />
+          ) : (
+            <Text style={styles.description}>{task.description}</Text>
+          )}
+        </View>
+
+        {/* Milestones */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Milestones</Text>
+          {task.milestones.map((milestone, index) => (
+            <View key={index} style={styles.milestoneRow}>
+              <TextInput
+                style={styles.milestoneInput}
+                value={milestone.title}
+                editable={false}
               />
-            </TouchableOpacity>
-          </View>
-        ))}
-      </View>
+              <TouchableOpacity
+                style={[
+                  styles.checkButton,
+                  milestone.done && styles.checkButtonActive,
+                ]}
+                onPress={() => handleMilestoneToggle(milestone.id)}>
+                <Icon
+                  name={
+                    milestone.done
+                      ? 'checkmark-done-outline'
+                      : 'checkmark-outline'
+                  }
+                  size={28}
+                  color="#FFFFFF"
+                />
+              </TouchableOpacity>
+            </View>
+          ))}
+        </View>
       </ScrollView>
+      {isTaskCompleted ? (
+        <CloseTaskBtn taskId={taskId} />
+      ) : (
+        <TaskSaveCloseBtn
+          isEditing={isEditing}
+          handleSaveEdits={handleSaveEdits}
+        />
+      )}
 
       {/* Close/Save Button */}
-      <TouchableOpacity
-        style={styles.closeButton}
-        onPress={isEditing ? handleSaveEdits : () => navigation.goBack()}>
-        <Text style={styles.closeButtonText}>
-          {isEditing ? 'Save' : 'Close'}
-        </Text>
-      </TouchableOpacity>
+      {/* <TaskSaveCloseBtn
+        isEditing={isEditing}
+        handleSaveEdits={handleSaveEdits}
+      /> */}
     </SafeAreaView>
   );
 };
@@ -130,7 +143,7 @@ const styles = StyleSheet.create({
   },
   section: {
     marginBottom: 24,
-    paddingHorizontal:16
+    paddingHorizontal: 16,
   },
   title: {
     color: '#FFFFFF',
@@ -205,7 +218,7 @@ const styles = StyleSheet.create({
     marginTop: 'auto',
     marginBottom: 26,
     marginHorizontal: 16,
-    marginTop:16
+    marginTop: 16,
   },
   closeButtonText: {
     color: '#16001E',
