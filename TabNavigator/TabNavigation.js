@@ -1,11 +1,13 @@
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 import {
   TabArchivedTasksScreen,
   TabMainScreen,
   TabNewTaskScreen,
   TabBookmarkedQuotes,
+  TabCompoletedTasks,
 } from '../screen/tab';
 
 const Tab = createBottomTabNavigator();
@@ -72,10 +74,10 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name="Settings"
-        component={TabMainScreen}
-        options={{
+          component={TabCompoletedTasks}
+          options={{
           tabBarIcon: ({color}) => (
-            <Icon name="settings-outline" size={28} color={color} />
+            <FontAwesome name="tasks" size={28} color={color} />
           ),
         }}
       />

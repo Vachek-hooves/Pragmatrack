@@ -1,3 +1,4 @@
 import StackWelcomeScreen from './StackWelcomeScreen';
 import StackTaskDetailsScreen from './StackTaskDetailsScreen';
-export {StackWelcomeScreen, StackTaskDetailsScreen};
+import StackStatisticsScreen from './StackStatisticsScreen';
+export {StackWelcomeScreen, StackTaskDetailsScreen, StackStatisticsScreen};

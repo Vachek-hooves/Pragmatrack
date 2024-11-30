@@ -41,7 +41,6 @@ const QuoteCard = () => {
   );
 };
 
-export default QuoteCard;
 
 const styles = StyleSheet.create({
   quoteContent: {
@@ -75,4 +74,6 @@ const styles = StyleSheet.create({
     borderRadius: '50%',
     padding: 8,
   },
-});
+})
+
+export default QuoteCard;

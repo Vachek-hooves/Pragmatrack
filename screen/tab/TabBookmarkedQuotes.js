@@ -7,7 +7,7 @@ const TabBookmarkedQuotes = () => {
   const {bookmarkedQuotes} = useAppContext();
   console.log(bookmarkedQuotes);
   const allBookmarkedQuotes = bookmarkedQuotes.map(quote => (
-    <QuoteBookmarked savedQuote={quote} />
+    <QuoteBookmarked savedQuote={quote} key={quote.id} />
   ));
   return <ScrollLayout title={'Saved Quotes'}>{allBookmarkedQuotes}</ScrollLayout>;
 };

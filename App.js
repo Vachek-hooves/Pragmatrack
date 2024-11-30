@@ -1,7 +1,11 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AppContext} from './store/context';
-import {StackTaskDetailsScreen, StackWelcomeScreen} from './screen/stack';
+import {
+  StackTaskDetailsScreen,
+  StackWelcomeScreen,
+  StackStatisticsScreen,
+} from './screen/stack';
 import TabNavigation from './TabNavigator/TabNavigation';
 
 const Stack = createNativeStackNavigator();
@@ -19,6 +23,10 @@ function App() {
           <Stack.Screen
             name="StackTaskDetailsScreen"
             component={StackTaskDetailsScreen}
+          />
+          <Stack.Screen
+            name="StackStatisticsScreen"
+            component={StackStatisticsScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>
