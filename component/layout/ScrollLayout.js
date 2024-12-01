@@ -6,7 +6,7 @@ const ScrollLayout = ({children, title}) => {
     <SafeAreaView style={styles.container}>
       <MainHeader title={title} />
       <ScrollView>{children}</ScrollView>
-      <View style={{height: 100}}></View>
+      {/* <View style={{height: 100}}></View> */}
     </SafeAreaView>
   );
 };

@@ -1,11 +1,15 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Octicons from 'react-native-vector-icons/Octicons';
+import {useNavigation} from '@react-navigation/native';
 
 const MainHeader = ({title}) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.header}>
-      <TouchableOpacity style={styles.iconButton}>
+      <TouchableOpacity
+        style={styles.iconButton}
+        onPress={() => navigation.goBack()}>
         <AntDesign name="back" size={28} color="#FFFFFF" />
       </TouchableOpacity>
       <View style={styles.titleContainer}>

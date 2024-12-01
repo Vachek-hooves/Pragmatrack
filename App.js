@@ -5,8 +5,10 @@ import {
   StackTaskDetailsScreen,
   StackWelcomeScreen,
   StackStatisticsScreen,
+  StackStoriesDetailScreen,
 } from './screen/stack';
 import TabNavigation from './TabNavigator/TabNavigation';
+import {Screen} from 'react-native-screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +29,10 @@ function App() {
           <Stack.Screen
             name="StackStatisticsScreen"
             component={StackStatisticsScreen}
+          />
+          <Stack.Screen
+            name="StackStoriesDetailScreen"
+            component={StackStoriesDetailScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

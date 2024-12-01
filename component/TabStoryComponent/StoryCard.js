@@ -16,7 +16,9 @@ const StoryCard = ({story}) => {
         </View>
         <TouchableOpacity
           style={styles.readButton}
-          onPress={() => navigation.navigate('StoryDetails', {story})}>
+          onPress={() =>
+            navigation.navigate('StackStoriesDetailScreen', {story})
+          }>
           <Text style={styles.readButtonText}>Read now</Text>
         </TouchableOpacity>
       </View>
