@@ -9,7 +9,12 @@ const TabBookmarkedQuotes = () => {
   const allBookmarkedQuotes = bookmarkedQuotes.map(quote => (
     <QuoteBookmarked savedQuote={quote} key={quote.id} />
   ));
-  return <ScrollLayout title={'Saved Quotes'}>{allBookmarkedQuotes}</ScrollLayout>;
+  return (
+    <View style={{flex: 1, backgroundColor: '#16001E'}}>
+      <ScrollLayout title={'Saved Quotes'}>{allBookmarkedQuotes}</ScrollLayout>
+      <View style={{height: 130}} />
+    </View>
+  );
 };
 
 export default TabBookmarkedQuotes;
