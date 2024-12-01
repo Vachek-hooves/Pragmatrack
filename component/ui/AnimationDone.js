@@ -1,4 +1,3 @@
-import {StyleSheet, Text, View} from 'react-native';
 import LottieView from 'lottie-react-native';
 
 const AnimationDone = () => {
@@ -15,4 +14,4 @@ const AnimationDone = () => {
 
 export default AnimationDone;
 
-const styles = StyleSheet.create({});
+
