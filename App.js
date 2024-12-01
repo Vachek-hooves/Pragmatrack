@@ -8,7 +8,6 @@ import {
   StackStoriesDetailScreen,
 } from './screen/stack';
 import TabNavigation from './TabNavigator/TabNavigation';
-import {Screen} from 'react-native-screens';
 
 const Stack = createNativeStackNavigator();
 

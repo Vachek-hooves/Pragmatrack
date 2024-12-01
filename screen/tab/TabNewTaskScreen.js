@@ -32,6 +32,7 @@ const TabNewTaskScreen = ({navigation}) => {
     };
     await addTask(newTask);
     navigation.goBack();
+    
   };
 
   const updateMilestone = (text, index) => {

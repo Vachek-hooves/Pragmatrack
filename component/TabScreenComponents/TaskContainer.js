@@ -8,10 +8,11 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useAppContext} from '../../store/context';
 import TaskCard from '../TabMainScreen.js/TaskCard';
+import {useNavigation} from '@react-navigation/native';
 
 const TaskContainer = () => {
+  const navigation = useNavigation();
   const {allTasks} = useAppContext();
- 
 
   const ExsitedTasks = () => (
     <ScrollView style={styles.container}>
@@ -21,10 +22,17 @@ const TaskContainer = () => {
     </ScrollView>
   );
 
+  const navigateToTabContainer = () => {
+    navigation.navigate('TabNavigation');
+    navigation.navigate('Add');
+  };
+
   const NoTasks = () => {
     return (
       <View style={styles.emptyStateContainer}>
-        <TouchableOpacity style={styles.emptyStateTextContainer}>
+        <TouchableOpacity
+          style={styles.emptyStateTextContainer}
+          onPress={navigateToTabContainer}>
           <Icon name="add" size={42} color="#FFFFFF" />
         </TouchableOpacity>
         <Text style={styles.emptyStateText}>

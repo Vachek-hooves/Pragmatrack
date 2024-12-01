@@ -8,7 +8,7 @@ import {
   TabNewTaskScreen,
   TabBookmarkedQuotes,
   TabCompoletedTasks,
-  TabStoriesScreen
+  TabStoriesScreen,
 } from '../screen/tab';
 
 const Tab = createBottomTabNavigator();
@@ -75,8 +75,8 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name="Settings"
-          component={TabCompoletedTasks}
-          options={{
+        component={TabCompoletedTasks}
+        options={{
           tabBarIcon: ({color}) => (
             <FontAwesome name="tasks" size={28} color={color} />
           ),

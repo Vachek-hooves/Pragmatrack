@@ -10,30 +10,29 @@ const MainHeader = ({title}) => {
     if (navigation.canGoBack()) {
       navigation.goBack();
     } else {
-      Alert.alert(
-        "Navigation",
-        "You're already on the main screen",
-        [
-          {
-            text: "OK",
-            style: "default"
-          }
-        ]
-      );
+      Alert.alert('Navigation', "You're already on the main screen", [
+        {
+          text: 'OK',
+          style: 'default',
+        },
+      ]);
     }
   };
 
+  const handleStatisticScreen = () => {
+    navigation.navigate('StackStatisticsScreen');
+  };
   return (
     <View style={styles.header}>
-      <TouchableOpacity
-        style={styles.iconButton}
-        onPress={handleBack}>
+      <TouchableOpacity style={styles.iconButton} onPress={handleBack}>
         <AntDesign name="back" size={28} color="#FFFFFF" />
       </TouchableOpacity>
       <View style={styles.titleContainer}>
         <Text style={styles.headerTitle}>{title}</Text>
       </View>
-      <TouchableOpacity style={styles.iconButton}>
+      <TouchableOpacity
+        style={styles.iconButton}
+        onPress={handleStatisticScreen}>
         <Octicons name="graph" size={28} color="#FFFFFF" />
       </TouchableOpacity>
     </View>
