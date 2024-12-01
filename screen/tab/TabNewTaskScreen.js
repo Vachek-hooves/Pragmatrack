@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {useAppContext} from '../../store/context';
 import MainHeader from '../../component/TabScreenComponents/MainHeader';
 import CalendarModal from '../../component/TabNewTaskComponent/CalendarModal';
+import AnimationDone from '../../component/ui/AnimationDone';
 
 const TabNewTaskScreen = ({navigation}) => {
   const {addTask} = useAppContext();
@@ -21,23 +22,31 @@ const TabNewTaskScreen = ({navigation}) => {
   const [milestones, setMilestones] = useState(['', '', '']);
   const [activeMilestoneCount, setActiveMilestoneCount] = useState(5);
   const [showCalendar, setShowCalendar] = useState(false);
+  const [showSaveAnimation, setShowSaveAnimation] = useState(false);
 
   const handleSave = async () => {
-    const newTask = {
-      title,
-      description,
-      dueDate: selectedDate,
-      milestones: milestones.filter(m => m !== ''),
-      completed: false,
-    };
-    await addTask(newTask);
-    navigation.goBack();
-
-    setTitle('');
-    setDescription('');
-    setSelectedDate('');
-    setMilestones(['', '', '']);
-    setActiveMilestoneCount(5);
+    setShowSaveAnimation(true);
+    
+    // Delay navigation and state reset to show animation
+    setTimeout(async () => {
+      const newTask = {
+        title,
+        description,
+        dueDate: selectedDate,
+        milestones: milestones.filter(m => m !== ''),
+        completed: false,
+      };
+      await addTask(newTask);
+      
+      setTitle('');
+      setDescription('');
+      setSelectedDate('');
+      setMilestones(['', '', '']);
+      setActiveMilestoneCount(5);
+      setShowSaveAnimation(false);
+      
+      navigation.goBack();
+    },3000); // Adjust timing based on your animation duration
   };
 
   const updateMilestone = (text, index) => {
@@ -71,93 +80,99 @@ const TabNewTaskScreen = ({navigation}) => {
         selectedDate={selectedDate}
       />
 
-      <ScrollView style={styles.container}>
-        {/* Header */}
-        <MainHeader title={'New Task'} />
-
-        {/* Details Section */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Details</Text>
-
-          <TextInput
-            style={styles.input}
-            placeholder="Title"
-            placeholderTextColor="rgba(255, 255, 255, 0.5)"
-            value={title}
-            onChangeText={setTitle}
-          />
-
-          <TouchableOpacity
-            style={styles.dateInput}
-            onPress={() => setShowCalendar(true)}>
-            <Text style={styles.dateText}>{selectedDate || 'Select date'}</Text>
-            <Icon name="calendar-outline" size={24} color="#FFFFFF" />
-          </TouchableOpacity>
-
-          <TextInput
-            style={[styles.input, styles.textArea]}
-            placeholder="Description of task"
-            placeholderTextColor="rgba(255, 255, 255, 0.5)"
-            multiline
-            value={description}
-            onChangeText={setDescription}
-          />
+      {showSaveAnimation ? (
+        <View style={styles.animationContainer}>
+          <AnimationDone />
         </View>
+      ) : (
+        <ScrollView style={styles.container}>
+          {/* Header */}
+          <MainHeader title={'New Task'} />
 
-        {/* Milestones Section */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Milestones</Text>
+          {/* Details Section */}
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Details</Text>
 
-          <View style={styles.milestoneCounter}>
+            <TextInput
+              style={styles.input}
+              placeholder="Title"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
+              value={title}
+              onChangeText={setTitle}
+            />
+
             <TouchableOpacity
-              style={[
-                styles.countButton,
-                activeMilestoneCount === 1 && styles.activeCount,
-              ]}
-              onPress={() => adjustMilestones(1)}>
-              <Text style={styles.countText}>1 milestone</Text>
+              style={styles.dateInput}
+              onPress={() => setShowCalendar(true)}>
+              <Text style={styles.dateText}>{selectedDate || 'Select date'}</Text>
+              <Icon name="calendar-outline" size={24} color="#FFFFFF" />
             </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.countButton,
-                activeMilestoneCount === 3 && styles.activeCount,
-              ]}
-              onPress={() => adjustMilestones(3)}>
-              <Text style={styles.countText}>3 milestones</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.countButton,
-                activeMilestoneCount === 5 && styles.activeCount,
-              ]}
-              onPress={() => adjustMilestones(5)}>
-              <Text style={styles.countText}>5 milestones</Text>
-            </TouchableOpacity>
+
+            <TextInput
+              style={[styles.input, styles.textArea]}
+              placeholder="Description of task"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
+              multiline
+              value={description}
+              onChangeText={setDescription}
+            />
           </View>
 
-          {milestones.slice(0, activeMilestoneCount).map((milestone, index) => (
-            <View key={index} style={styles.milestoneRow}>
-              <TextInput
-                style={styles.milestoneInput}
-                placeholder={`Milestone ${index + 1}`}
-                placeholderTextColor="rgba(255, 255, 255, 0.5)"
-                value={milestone}
-                onChangeText={text => updateMilestone(text, index)}
-              />
+          {/* Milestones Section */}
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Milestones</Text>
+
+            <View style={styles.milestoneCounter}>
               <TouchableOpacity
-                onPress={() => deleteMilestone(index)}
-                style={styles.deleteButton}>
-                <Icon name="trash-outline" size={24} color="#FFFFFF" />
+                style={[
+                  styles.countButton,
+                  activeMilestoneCount === 1 && styles.activeCount,
+                ]}
+                onPress={() => adjustMilestones(1)}>
+                <Text style={styles.countText}>1 milestone</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.countButton,
+                  activeMilestoneCount === 3 && styles.activeCount,
+                ]}
+                onPress={() => adjustMilestones(3)}>
+                <Text style={styles.countText}>3 milestones</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.countButton,
+                  activeMilestoneCount === 5 && styles.activeCount,
+                ]}
+                onPress={() => adjustMilestones(5)}>
+                <Text style={styles.countText}>5 milestones</Text>
               </TouchableOpacity>
             </View>
-          ))}
-        </View>
 
-        {/* Save Button */}
-        <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-          <Text style={styles.saveButtonText}>Save</Text>
-        </TouchableOpacity>
-      </ScrollView>
+            {milestones.slice(0, activeMilestoneCount).map((milestone, index) => (
+              <View key={index} style={styles.milestoneRow}>
+                <TextInput
+                  style={styles.milestoneInput}
+                  placeholder={`Milestone ${index + 1}`}
+                  placeholderTextColor="rgba(255, 255, 255, 0.5)"
+                  value={milestone}
+                  onChangeText={text => updateMilestone(text, index)}
+                />
+                <TouchableOpacity
+                  onPress={() => deleteMilestone(index)}
+                  style={styles.deleteButton}>
+                  <Icon name="trash-outline" size={24} color="#FFFFFF" />
+                </TouchableOpacity>
+              </View>
+            ))}
+          </View>
+
+          {/* Save Button */}
+          <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+            <Text style={styles.saveButtonText}>Save</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      )}
       <View style={{height: 100}}></View>
     </SafeAreaView>
   );
@@ -308,5 +323,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#6F4D7B',
     padding: 12,
     borderRadius: 8,
+  },
+  animationContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

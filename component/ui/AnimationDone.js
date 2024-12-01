@@ -5,9 +5,10 @@ const AnimationDone = () => {
   return (
     <LottieView
       source={require('../../assets/animations/done.json')}
-      style={{width: 302, height: 200}}
+      style={{width: '100%', height: '100%'}}
       autoPlay={true}
       loop={true}
+      speed={1.2}
     />
   );
 };
