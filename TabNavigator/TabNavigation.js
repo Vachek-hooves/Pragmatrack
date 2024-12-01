@@ -8,6 +8,7 @@ import {
   TabNewTaskScreen,
   TabBookmarkedQuotes,
   TabCompoletedTasks,
+  TabStoriesScreen
 } from '../screen/tab';
 
 const Tab = createBottomTabNavigator();
@@ -65,7 +66,7 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name="Delete"
-        component={TabArchivedTasksScreen}
+        component={TabStoriesScreen}
         options={{
           tabBarIcon: ({color}) => (
             <Icon name="trash-outline" size={28} color={color} />
