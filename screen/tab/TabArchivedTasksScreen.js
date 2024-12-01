@@ -1,4 +1,3 @@
-import {StyleSheet} from 'react-native';
 import {useAppContext} from '../../store/context';
 import ScrollLayout from '../../component/layout/ScrollLayout';
 import ArchivedTask from '../../component/TabArchivedTasksScreen/ArchivedTask';
@@ -8,7 +7,13 @@ const TabArchivedTasksScreen = () => {
 
   const renderArchivedTasks = () => {
     return archivedTasks.map(task => {
-      return <ArchivedTask archivedTask={task} key={task.id} taskStatus={'Deleted Task'}/>;
+      return (
+        <ArchivedTask
+          archivedTask={task}
+          key={task.id}
+          taskStatus={'Deleted Task'}
+        />
+      );
     });
   };
   return (
@@ -19,5 +24,3 @@ const TabArchivedTasksScreen = () => {
 };
 
 export default TabArchivedTasksScreen;
-
-const styles = StyleSheet.create({});

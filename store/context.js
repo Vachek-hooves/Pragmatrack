@@ -111,6 +111,7 @@ export const AppContext = ({children}) => {
     removeBookmarkedQuote,
     closeTask
   };
+  
   return (
     <CreateContext.Provider value={value}>{children}</CreateContext.Provider>
   );
