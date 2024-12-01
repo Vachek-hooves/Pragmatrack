@@ -74,7 +74,7 @@ export const AppContext = ({children}) => {
   };
 
   const saveBookmarkedQuote = async (quote) => {
-    // console.log('save bookmarked quote', quote);
+
     const updatedBookmarkedQuotes=[...bookmarkedQuotes,quote]
     setBookmarkedQuotes(updatedBookmarkedQuotes);
     await saveBookmarkedQuotesToStorage(updatedBookmarkedQuotes);
@@ -86,8 +86,6 @@ export const AppContext = ({children}) => {
   }
 
   const closeTask=async(taskId)=>{
-    // console.log('closing task',taskId)
-
     // completed task to all completed tasks
     const taskToClose=allTasks.find(task=>task.id===taskId)
     const updatedCompletedTasks=[...allCompletedTasks,taskToClose]
