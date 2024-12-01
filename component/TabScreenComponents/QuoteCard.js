@@ -15,7 +15,6 @@ const QuoteCard = () => {
   const isBookmarked = bookmarkedQuotes.some(
     quote => quote.id === randomQuote.id,
   );
-  console.log(isBookmarked, 'this quote is bookmarked');
 
   return (
     <View style={styles.quoteCard}>

@@ -5,10 +5,10 @@ import {useAppContext} from '../../store/context';
 
 const QuoteBookmarked = ({savedQuote}) => {
     const {removeBookmarkedQuote} = useAppContext();
-    console.log(savedQuote,'saved quote');
+    // console.log(savedQuote,'saved quote');
 
     const handleRemoveBookmark = (quote) => {
-        console.log(quote,'remove this quote');
+        // console.log(quote,'remove this quote');
         removeBookmarkedQuote(quote);
     }
   return (

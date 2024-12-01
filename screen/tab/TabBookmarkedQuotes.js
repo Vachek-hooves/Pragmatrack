@@ -5,7 +5,7 @@ import QuoteBookmarked from '../../component/TabBookmaredComponent/QuoteBookmark
 
 const TabBookmarkedQuotes = () => {
   const {bookmarkedQuotes} = useAppContext();
-  console.log(bookmarkedQuotes);
+
   const allBookmarkedQuotes = bookmarkedQuotes.map(quote => (
     <QuoteBookmarked savedQuote={quote} key={quote.id} />
   ));

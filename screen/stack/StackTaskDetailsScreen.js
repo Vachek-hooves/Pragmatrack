@@ -19,7 +19,6 @@ const StackTaskDetailsScreen = ({route, navigation}) => {
   //   const navigation = useNavigation();
   const {allTasks, updateTask} = useAppContext();
   const {taskId} = route.params;
-  console.log(allTasks[0].milestones);
 
   // Find the current task
   const task = allTasks.find(task => task.id === taskId);
