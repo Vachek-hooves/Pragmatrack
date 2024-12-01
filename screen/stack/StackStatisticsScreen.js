@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import ScrollLayout from '../../component/layout/ScrollLayout';
 import {useAppContext} from '../../store/context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AnimationStatistics from '../../component/ui/AnimationStatistics';
+import {useNavigation} from '@react-navigation/native';
 
 const StatCard = ({value, label}) => (
   <View style={styles.card}>
@@ -21,6 +22,7 @@ const StatCard = ({value, label}) => (
 );
 
 const StackStatisticsScreen = () => {
+  const navigation = useNavigation();
   const {allTasks, archivedTasks} = useAppContext();
   const [readStoriesCount, setReadStoriesCount] = useState(0);
 
@@ -37,6 +39,10 @@ const StackStatisticsScreen = () => {
       console.error('Error loading read stories count:', error);
       setReadStoriesCount(0);
     }
+  };
+
+  const handleBack = () => {
+    navigation.goBack();
   };
 
   // Calculate other statistics
@@ -62,6 +68,11 @@ const StackStatisticsScreen = () => {
           <StatCard value={readStoriesCount} label="Read stories" />
         </View>
       </View>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={handleBack}>
+        <Text style={styles.backButtonText}>Back</Text>
+      </TouchableOpacity>
     </ScrollLayout>
   );
 };
@@ -103,6 +114,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     opacity: 0.8,
+  },
+  backButton: {
+    backgroundColor: '#6F4D7B',
+    paddingVertical: 16,
+    borderRadius: 8,
+    alignItems: 'center',
+    width: '80%',
+    alignSelf: 'center',
+    marginTop: 20,
+  },
+  backButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });
 
