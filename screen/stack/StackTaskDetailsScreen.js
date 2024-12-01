@@ -124,13 +124,7 @@ const StackTaskDetailsScreen = ({route, navigation}) => {
           isEditing={isEditing}
           handleSaveEdits={handleSaveEdits}
         />
-      )}
-
-      {/* Close/Save Button */}
-      {/* <TaskSaveCloseBtn
-        isEditing={isEditing}
-        handleSaveEdits={handleSaveEdits}
-      /> */}
+      )}xs
     </SafeAreaView>
   );
 };

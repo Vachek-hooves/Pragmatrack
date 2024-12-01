@@ -14,21 +14,13 @@ const ArchivedTask = ({archivedTask, taskStatus}) => {
       {/* Milestone Indicators */}
       <View style={styles.milestoneContainer}>
         {archivedTask.milestones.map((milestone, index) => (
-          <View
-            key={`${milestone.id}`}
-            style={[
-              styles.milestoneIndicator,
-              //   milestone.done && styles.milestoneDone,
-              //   index === archivedTask.milestones.findIndex(m => !m.done) &&
-              //     styles.milestoneActive,
-            ]}>
+          <View key={`${milestone.id}`} style={[styles.milestoneIndicator]}>
             <Text style={styles.milestoneNumber}>{index + 1}</Text>
           </View>
         ))}
       </View>
 
       {/* Action Buttons */}
-
       <View style={styles.actionContainer}>
         <Text style={styles.openButton}>
           <Text style={styles.openButtonText}>{taskStatus}</Text>
