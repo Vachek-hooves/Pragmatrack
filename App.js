@@ -16,10 +16,10 @@ function App() {
     <AppContext>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
-          {/* <Stack.Screen
+          <Stack.Screen
             name="StackWelcomeScreen"
             component={StackWelcomeScreen}
-          /> */}
+          />
           <Stack.Screen name="TabNavigation" component={TabNavigation} />
           <Stack.Screen
             name="StackTaskDetailsScreen"

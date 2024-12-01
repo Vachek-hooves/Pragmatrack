@@ -1,14 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import {StyleSheet, Text, View} from 'react-native';
+import StackLayout from '../../component/layout/StackLayout';
+import Logo from '../../component/ui/Logo';
 
 const StackWelcomeScreen = () => {
   return (
-    <View>
-      <Text>StackWelcomeScreen</Text>
-    </View>
-  )
-}
+    <StackLayout>
+      <Logo />
+    </StackLayout>
+  );
+};
 
-export default StackWelcomeScreen
+export default StackWelcomeScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
