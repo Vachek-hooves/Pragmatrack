@@ -3,10 +3,13 @@ import {useNavigation} from '@react-navigation/native';
 import {useAppContext} from '../../store/context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LottieView from 'lottie-react-native';
+import AnimationDelete from '../ui/AnimationDelete';
+import {useState} from 'react';
 
 const TaskCard = ({task}) => {
   const navigation = useNavigation();
   const {deleteTask} = useAppContext();
+  const [showDeleteAnimation, setShowDeleteAnimation] = useState(false);
 
   const handleOpenTask = () => {
     navigation.navigate('StackTaskDetailsScreen', {taskId: task.id});
@@ -15,7 +18,15 @@ const TaskCard = ({task}) => {
   const handleDeleteTask = () => {
     Alert.alert('Delete Task', 'Are you sure you want to delete this task?', [
       {text: 'Cancel', style: 'cancel'},
-      {text: 'Delete', onPress: () => deleteTask(task.id)},
+      {
+        text: 'Delete',
+        onPress: () => {
+          setShowDeleteAnimation(true);
+          setTimeout(() => {
+            deleteTask(task.id);
+          }, 2500);
+        },
+      },
     ]);
   };
 
@@ -30,6 +41,14 @@ const TaskCard = ({task}) => {
       />
     );
   };
+
+  if (showDeleteAnimation) {
+    return (
+      <View style={styles.container}>
+        <AnimationDelete />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>

@@ -22,10 +22,6 @@ const TaskContainer = () => {
     </ScrollView>
   );
 
-  const navigateToTabContainer = () => {
-    navigation.navigate('TabNavigation');
-    navigation.navigate('Add');
-  };
 
   const NoTasks = () => {
     return (
@@ -42,11 +38,14 @@ const TaskContainer = () => {
       </View>
     );
   };
-
+  
+const navigateToTabContainer = () => {
+    navigation.navigate('TabNavigation');
+    navigation.navigate('Add');
+  };
   return (
     <View style={styles.taskContainer}>
       <ScrollView style={{flex: 1, padding: 10}}>
-        {/* Empty State */}
         {allTasks.length === 0 ? <NoTasks /> : <ExsitedTasks />}
       </ScrollView>
     </View>
