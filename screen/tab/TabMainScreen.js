@@ -15,7 +15,7 @@ const TabMainScreen = () => {
 
       {/*All Tasks Container */}
       <TaskContainer />
-      <View style={{height: 100}} />
+      <View style={{height: 120}} />
     </SafeAreaView>
   );
 };

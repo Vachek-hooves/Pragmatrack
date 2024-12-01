@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import {WELCOME_DATA} from '../../data/welcomeData';
 import Logo from '../../component/ui/Logo';
 import StackLayout from '../../component/layout/StackLayout';
@@ -22,11 +28,8 @@ const StackWelcomeScreen = ({navigation}) => {
   const currentData = WELCOME_DATA[currentIndex];
 
   return (
-    <StackLayout>
-      {/* Logo Section */}
-      {/* <View style={styles.logoContainer}> */}
+    <ScrollView style={styles.scrollViewContainer}>
       <Logo />
-      {/* </View> */}
 
       {/* Content Section */}
       <View style={styles.contentContainer}>
@@ -64,12 +67,17 @@ const StackWelcomeScreen = ({navigation}) => {
           </TouchableOpacity>
         )}
       </View>
-      <View style={{height: 50}} />
-    </StackLayout>
+      <View style={{height: 20}} />
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollViewContainer: {
+    flex: 1,
+    backgroundColor: '#16001E',
+   paddingTop: 50,
+  },
   container: {
     flex: 1,
     backgroundColor: '#16001E',
@@ -77,7 +85,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 40,
   },
-
   contentContainer: {
     alignItems: 'center',
     paddingHorizontal: 30,
@@ -108,6 +115,8 @@ const styles = StyleSheet.create({
   paginationContainer: {
     flexDirection: 'row',
     marginBottom: 40,
+    justifyContent: 'center',
+    marginVertical: 15,
   },
   paginationDot: {
     width: 8,
@@ -124,6 +133,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 30,
     gap: 16,
+    // marginBottom:150
   },
   getStartedButton: {
     backgroundColor: '#FFFFFF',
