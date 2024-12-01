@@ -41,7 +41,7 @@ const TaskCard = ({task}) => {
         {task.description}
       </Text>
 
-      {lottieAnimation()}
+      {/* {lottieAnimation()} */}
       {/* Milestone Indicators */}
       <View style={styles.milestoneContainer}>
         {task.milestones.map((milestone, index) => (

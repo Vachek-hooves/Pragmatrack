@@ -12,6 +12,7 @@ const QuoteCard = () => {
   };
 
   const randomQuote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+  
   const isBookmarked = bookmarkedQuotes.some(
     quote => quote.id === randomQuote.id,
   );
@@ -28,12 +29,13 @@ const QuoteCard = () => {
         <Text style={styles.quoteAuthor}>{randomQuote.person}</Text>
       </View>
       <TouchableOpacity
+        disabled={isBookmarked}
         style={styles.bookmarkIcon}
         onPress={() => handleBookmarkQuote(randomQuote)}>
         <Icon
           name="bookmark-outline"
           size={28}
-          color={isBookmarked ? 'green' : '#fff'}
+          color={isBookmarked ? 'black' : '#fff'}
         />
       </TouchableOpacity>
     </View>

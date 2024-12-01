@@ -15,6 +15,10 @@ import ScrollLayout from '../../component/layout/ScrollLayout';
 const StackStoriesDetailScreen = ({route, navigation}) => {
   const {story} = route.params;
 
+  const handleCloseBtn = () => {
+    navigation.goBack();
+  };
+
   return (
     <ScrollLayout title={'Reading Story'}>
       <View style={{marginHorizontal: 26, flex: 1}}>
@@ -42,12 +46,9 @@ const StackStoriesDetailScreen = ({route, navigation}) => {
 
         {/* Action Buttons */}
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.closeButton}
-            onPress={() => navigation.goBack()}>
+          <TouchableOpacity style={styles.closeButton} onPress={handleCloseBtn}>
             <Text style={styles.closeButtonText}>Close</Text>
           </TouchableOpacity>
-
         </View>
       </View>
     </ScrollLayout>
@@ -55,7 +56,6 @@ const StackStoriesDetailScreen = ({route, navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  
   storyImage: {
     width: '100%',
     height: 200,
