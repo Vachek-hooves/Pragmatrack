@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {stories} from '../../data/stories';
 
 const TabStoriesScreen = () => {
   return (
@@ -10,5 +10,3 @@ const TabStoriesScreen = () => {
 };
 
 export default TabStoriesScreen;
-
-
