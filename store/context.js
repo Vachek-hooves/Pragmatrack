@@ -9,6 +9,8 @@ import {
   loadArchivedTasksFromStorage,
   loadBookmarkedQuotesFromStorage,
   saveBookmarkedQuotesToStorage,
+  loadCompletedTasksFromStorage,
+  saveCompletedTaskToStorage,
 } from './utils';
 
 const CreateContext = createContext({
@@ -19,6 +21,7 @@ const CreateContext = createContext({
   updateTask: () => {},
   saveBookmarkedQuote: () => {},
   removeBookmarkedQuote: () => {},
+  closeTask: () => {},
 });
 
 
@@ -26,6 +29,7 @@ export const AppContext = ({children}) => {
   const [allTasks, setAllTasks] = useState([]);
   const [archivedTasks, setArchivedTasks] = useState([]);
   const [bookmarkedQuotes, setBookmarkedQuotes] = useState([]);
+  const [allCompletedTasks, setAllCompletedTasks] = useState([])
 
   useEffect(() => {
     const initializeTasks = async () => {
@@ -35,6 +39,8 @@ export const AppContext = ({children}) => {
       setArchivedTasks(archivedTasks);
       const bookmarkedQuotes = await loadBookmarkedQuotesFromStorage();
       setBookmarkedQuotes(bookmarkedQuotes);
+      const completedTasks = await loadCompletedTasksFromStorage();
+      setAllCompletedTasks(completedTasks);
     };
     initializeTasks();
   }, []);
@@ -79,9 +85,24 @@ export const AppContext = ({children}) => {
     await saveBookmarkedQuotesToStorage(updatedBookmarkedQuotes);
   }
 
-  
+  const closeTask=async(taskId)=>{
+    // console.log('closing task',taskId)
+
+    // completed task to all completed tasks
+    const taskToClose=allTasks.find(task=>task.id===taskId)
+    const updatedCompletedTasks=[...allCompletedTasks,taskToClose]
+    setAllCompletedTasks(updatedCompletedTasks)
+    await saveCompletedTaskToStorage(updatedCompletedTasks)
+
+    // remove from all tasks
+    const updatedTasks=removeTask(taskId,allTasks)
+    setAllTasks(updatedTasks)
+    await saveTasksToStorage(updatedTasks)
+
+  }
 
   const value = { 
+    allCompletedTasks,
     archivedTasks,
     allTasks,
     bookmarkedQuotes,
@@ -89,7 +110,8 @@ export const AppContext = ({children}) => {
     deleteTask,
     updateTask,
     saveBookmarkedQuote,
-    removeBookmarkedQuote
+    removeBookmarkedQuote,
+    closeTask
   };
   return (
     <CreateContext.Provider value={value}>{children}</CreateContext.Provider>

@@ -1,8 +1,14 @@
 import {StyleSheet, Text, View,TouchableOpacity} from 'react-native';
+import {useAppContext} from '../../store/context';
+import { useNavigation } from '@react-navigation/native';
 
 const CloseTaskBtn = ({taskId}) => {
+    const navigation=useNavigation()
+    const {closeTask}=useAppContext()
     const handleCloseTask = () => {
-        console.log('Closing task with ID:', taskId);
+        // console.log('Closing task with ID:', taskId);
+        closeTask(taskId)
+        navigation.goBack()
     };
   return (
     <TouchableOpacity style={styles.taskCompleted} onPress={handleCloseTask}>
