@@ -1,15 +1,33 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, Alert} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Octicons from 'react-native-vector-icons/Octicons';
 import {useNavigation} from '@react-navigation/native';
 
 const MainHeader = ({title}) => {
   const navigation = useNavigation();
+
+  const handleBack = () => {
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    } else {
+      Alert.alert(
+        "Navigation",
+        "You're already on the main screen",
+        [
+          {
+            text: "OK",
+            style: "default"
+          }
+        ]
+      );
+    }
+  };
+
   return (
     <View style={styles.header}>
       <TouchableOpacity
         style={styles.iconButton}
-        onPress={() => navigation.goBack()}>
+        onPress={handleBack}>
         <AntDesign name="back" size={28} color="#FFFFFF" />
       </TouchableOpacity>
       <View style={styles.titleContainer}>
@@ -32,10 +50,8 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   iconButton: {
-    // width: 40,
-    // height: 40,
-    borderRadius: '50%',
-    backgroundColor: '#6F4D7B' + 50,
+    borderRadius: 50,
+    backgroundColor: '#6F4D7B50',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 15,
@@ -43,7 +59,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#6F4D7B' + 50,
+    backgroundColor: '#6F4D7B50',
     marginHorizontal: 30,
     justifyContent: 'center',
     borderRadius: 30,
