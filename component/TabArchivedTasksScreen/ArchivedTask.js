@@ -36,7 +36,7 @@ const ArchivedTask = ({archivedTask}) => {
 
       <View style={styles.actionContainer}>
         <Text style={styles.openButton}>
-          <Text style={styles.openButtonText}>Archived</Text>
+          <Text style={styles.openButtonText}>Deleted Task</Text>
         </Text>
       </View>
     </View>
