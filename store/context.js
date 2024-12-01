@@ -12,7 +12,6 @@ import {
   loadCompletedTasksFromStorage,
   saveCompletedTaskToStorage,
 } from './utils';
-
 const CreateContext = createContext({
   allTasks: [],
   archivedTasks: [],
@@ -23,7 +22,6 @@ const CreateContext = createContext({
   removeBookmarkedQuote: () => {},
   closeTask: () => {},
 });
-
 
 export const AppContext = ({children}) => {
   const [allTasks, setAllTasks] = useState([]);
