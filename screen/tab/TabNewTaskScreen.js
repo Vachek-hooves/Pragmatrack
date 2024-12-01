@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   section: {
-    marginBottom: 24,
+    marginBottom: 16,
   },
   sectionTitle: {
     color: '#FFFFFF',
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     alignItems: 'center',
-    marginTop: 24,
+    // marginTop: 10,
     marginBottom: 40,
     borderWidth: 1,
   },

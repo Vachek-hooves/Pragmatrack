@@ -69,7 +69,7 @@ const TabNavigation = () => {
         component={TabStoriesScreen}
         options={{
           tabBarIcon: ({color}) => (
-            <Icon name="trash-outline" size={28} color={color} />
+            <Icon name="book-outline" size={28} color={color} />
           ),
         }}
       />

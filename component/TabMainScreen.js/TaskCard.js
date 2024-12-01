@@ -2,6 +2,7 @@ import {StyleSheet, Text, View, TouchableOpacity, Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useAppContext} from '../../store/context';
 import Icon from 'react-native-vector-icons/Ionicons';
+import LottieView from 'lottie-react-native';
 
 const TaskCard = ({task}) => {
   const navigation = useNavigation();
@@ -18,6 +19,18 @@ const TaskCard = ({task}) => {
     ]);
   };
 
+  const lottieAnimation = () => {
+    return (
+      <LottieView
+        source={require('../../assets/animations/graph.json')}
+        style={{width: 202, height: 200}}
+        autoPlay={true}
+        loop={true}
+        speed={1.8}
+      />
+    );
+  };
+
   return (
     <View style={styles.container}>
       {/* Title and Description */}
@@ -28,10 +41,10 @@ const TaskCard = ({task}) => {
         {task.description}
       </Text>
 
+      {lottieAnimation()}
       {/* Milestone Indicators */}
       <View style={styles.milestoneContainer}>
         {task.milestones.map((milestone, index) => (
-         
           <View
             key={index + 1}
             style={[
