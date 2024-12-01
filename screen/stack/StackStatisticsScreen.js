@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import ScrollLayout from '../../component/layout/ScrollLayout';
-import { useAppContext } from '../../store/context';
+import {useAppContext} from '../../store/context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import AnimationStatistics from '../../component/ui/AnimationStatistics';
 
-const StatCard = ({ value, label }) => (
+const StatCard = ({value, label}) => (
   <View style={styles.card}>
     <View style={styles.circleContainer}>
       <Text style={styles.valueText}>
-        {typeof value === 'number' && !isNaN(value) ? 
-          (label.includes('%') ? `${value}%` : value) 
+        {typeof value === 'number' && !isNaN(value)
+          ? label.includes('%')
+            ? `${value}%`
+            : value
           : '0'}
       </Text>
     </View>
@@ -18,7 +21,7 @@ const StatCard = ({ value, label }) => (
 );
 
 const StackStatisticsScreen = () => {
-  const { allTasks, archivedTasks } = useAppContext();
+  const {allTasks, archivedTasks} = useAppContext();
   const [readStoriesCount, setReadStoriesCount] = useState(0);
 
   useEffect(() => {
@@ -39,34 +42,24 @@ const StackStatisticsScreen = () => {
   // Calculate other statistics
   const endedTasks = archivedTasks?.length || 0;
   const totalTasks = (allTasks?.length || 0) + (archivedTasks?.length || 0);
-  const completionPercentage = totalTasks > 0 
-    ? Math.round((endedTasks / totalTasks) * 100) 
-    : 0;
-  const totalMilestones = allTasks.reduce((total, task) => 
-    total + (task.milestones?.length || 0), 0);
+  const completionPercentage =
+    totalTasks > 0 ? Math.round((endedTasks / totalTasks) * 100) : 0;
+  const totalMilestones = allTasks.reduce(
+    (total, task) => total + (task.milestones?.length || 0),
+    0,
+  );
 
   return (
     <ScrollLayout title="Statistics">
+      <AnimationStatistics />
       <View style={styles.container}>
         <View style={styles.row}>
-          <StatCard 
-            value={endedTasks} 
-            label="Ended Tasks" 
-          />
-          <StatCard 
-            value={completionPercentage} 
-            label="% of completed" 
-          />
+          <StatCard value={endedTasks} label="Ended Tasks" />
+          <StatCard value={completionPercentage} label="% of completed" />
         </View>
         <View style={styles.row}>
-          <StatCard 
-            value={totalMilestones} 
-            label="Milestones" 
-          />
-          <StatCard 
-            value={readStoriesCount} 
-            label="Read stories" 
-          />
+          <StatCard value={totalMilestones} label="Milestones" />
+          <StatCard value={readStoriesCount} label="Read stories" />
         </View>
       </View>
     </ScrollLayout>
