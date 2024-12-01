@@ -1,10 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
 
-const ArchivedTask = ({archivedTask}) => {
+const ArchivedTask = ({archivedTask, taskStatus}) => {
   return (
     <View style={styles.container}>
       {/* Title and Description */}
-      <Text style={styles.title} numberOfLines={1}>
+      <Text style={styles?.title} numberOfLines={1}>
         {archivedTask.title}
       </Text>
       <Text style={styles.description} numberOfLines={2}>
@@ -13,30 +13,25 @@ const ArchivedTask = ({archivedTask}) => {
 
       {/* Milestone Indicators */}
       <View style={styles.milestoneContainer}>
-        {archivedTask.milestones.map(
-          (milestone, index) => (
-           
-            (
-              <View
-                key={`${ milestone.id}`}
-                style={[
-                  styles.milestoneIndicator,
-                //   milestone.done && styles.milestoneDone,
-                //   index === archivedTask.milestones.findIndex(m => !m.done) &&
-                //     styles.milestoneActive,
-                ]}>
-                <Text style={styles.milestoneNumber}>{index + 1}</Text>
-              </View>
-            )
-          ),
-        )}
+        {archivedTask.milestones.map((milestone, index) => (
+          <View
+            key={`${milestone.id}`}
+            style={[
+              styles.milestoneIndicator,
+              //   milestone.done && styles.milestoneDone,
+              //   index === archivedTask.milestones.findIndex(m => !m.done) &&
+              //     styles.milestoneActive,
+            ]}>
+            <Text style={styles.milestoneNumber}>{index + 1}</Text>
+          </View>
+        ))}
       </View>
 
       {/* Action Buttons */}
 
       <View style={styles.actionContainer}>
         <Text style={styles.openButton}>
-          <Text style={styles.openButtonText}>Deleted Task</Text>
+          <Text style={styles.openButtonText}>{taskStatus}</Text>
         </Text>
       </View>
     </View>

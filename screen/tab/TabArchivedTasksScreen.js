@@ -9,7 +9,7 @@ const TabArchivedTasksScreen = () => {
 
   const renderArchivedTasks = () => {
     return archivedTasks.map(task => {
-      return <ArchivedTask archivedTask={task} key={task.id} />;
+      return <ArchivedTask archivedTask={task} key={task.id} taskStatus={'Deleted Task'}/>;
     });
   };
   return (
