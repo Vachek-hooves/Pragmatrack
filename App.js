@@ -6,6 +6,7 @@ import {
   StackWelcomeScreen,
   StackStatisticsScreen,
   StackStoriesDetailScreen,
+  StackUserScreen,
 } from './screen/stack';
 import TabNavigation from './TabNavigator/TabNavigation';
 
@@ -33,6 +34,7 @@ function App() {
             name="StackStoriesDetailScreen"
             component={StackStoriesDetailScreen}
           />
+          <Stack.Screen name="StackUserScreen" component={StackUserScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </AppContext>

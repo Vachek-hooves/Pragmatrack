@@ -22,10 +22,18 @@ const MainHeader = ({title}) => {
   const handleStatisticScreen = () => {
     navigation.navigate('StackStatisticsScreen');
   };
+
+  const handleUserScreen = () => {
+    navigation.navigate('StackUserScreen');
+  };
+
   return (
     <View style={styles.header}>
-      <TouchableOpacity style={styles.iconButton} onPress={handleBack}>
-        <AntDesign name="back" size={28} color="#FFFFFF" />
+      <TouchableOpacity style={styles.iconButton}
+      //  onPress={handleBack}
+      onPress={handleUserScreen}
+       >
+        <AntDesign name="user" size={28} color="#FFFFFF" />
       </TouchableOpacity>
       <View style={styles.titleContainer}>
         <Text style={styles.headerTitle}>{title}</Text>
