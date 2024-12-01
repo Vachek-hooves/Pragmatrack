@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import ScrollLayout from '../../component/layout/ScrollLayout';
 import { useAppContext } from '../../store/context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const StatCard = ({ value, label }) => (
   <View style={styles.card}>
@@ -18,22 +19,31 @@ const StatCard = ({ value, label }) => (
 
 const StackStatisticsScreen = () => {
   const { allTasks, archivedTasks } = useAppContext();
-  console.log(allTasks);
+  const [readStoriesCount, setReadStoriesCount] = useState(0);
 
-  // Calculate statistics
+  useEffect(() => {
+    loadReadStoriesCount();
+  }, []);
+
+  const loadReadStoriesCount = async () => {
+    try {
+      const readStoriesStr = await AsyncStorage.getItem('readStories');
+      const readStories = readStoriesStr ? JSON.parse(readStoriesStr) : [];
+      setReadStoriesCount(readStories.length);
+    } catch (error) {
+      console.error('Error loading read stories count:', error);
+      setReadStoriesCount(0);
+    }
+  };
+
+  // Calculate other statistics
   const endedTasks = archivedTasks?.length || 0;
-  
-  // Calculate completion percentage based on total and completed tasks
   const totalTasks = (allTasks?.length || 0) + (archivedTasks?.length || 0);
   const completionPercentage = totalTasks > 0 
     ? Math.round((endedTasks / totalTasks) * 100) 
     : 0;
-  
-  // Total milestones across all active tasks
   const totalMilestones = allTasks.reduce((total, task) => 
     total + (task.milestones?.length || 0), 0);
-
-  const readStories = 6; // This should be tracked in your context
 
   return (
     <ScrollLayout title="Statistics">
@@ -54,7 +64,7 @@ const StackStatisticsScreen = () => {
             label="Milestones" 
           />
           <StatCard 
-            value={readStories} 
+            value={readStoriesCount} 
             label="Read stories" 
           />
         </View>

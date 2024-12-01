@@ -1,22 +1,30 @@
-import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import MainHeader from '../../component/TabScreenComponents/MainHeader';
 import ScrollLayout from '../../component/layout/ScrollLayout';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const StackStoriesDetailScreen = ({route, navigation}) => {
   const {story} = route.params;
 
-  const handleCloseBtn = () => {
-    navigation.goBack();
+  const handleCloseBtn = async () => {
+    try {
+      // Get current read stories from storage
+      const readStoriesStr = await AsyncStorage.getItem('readStories');
+      let readStories = readStoriesStr ? JSON.parse(readStoriesStr) : [];
+
+      // Check if story is already marked as read
+      if (!readStories.includes(story.id)) {
+        // Add story ID to read stories
+        readStories.push(story.id);
+        // Save updated read stories to storage
+        await AsyncStorage.setItem('readStories', JSON.stringify(readStories));
+      }
+
+      navigation.goBack();
+    } catch (error) {
+      console.error('Error saving read story:', error);
+      navigation.goBack();
+    }
   };
 
   return (
