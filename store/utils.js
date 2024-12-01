@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Storage operations
+// Task operations
 export const loadTasksFromStorage = async () => {
   try {
     const savedTasks = await AsyncStorage.getItem('tasks');
@@ -21,14 +21,32 @@ export const loadArchivedTasksFromStorage = async () => {
   }
 };
 
-export const loadBookmarkedQuotesFromStorage = async () => {
+export const saveTasksToStorage = async tasks => {
   try {
-    const savedBookmarkedQuotes = await AsyncStorage.getItem('bookmarkedQuotes');
-    return savedBookmarkedQuotes ? JSON.parse(savedBookmarkedQuotes) : [];
+    await AsyncStorage.setItem('tasks', JSON.stringify(tasks));
   } catch (error) {
-    console.error('Error loading bookmarked quotes:', error);
-    return [];
+    console.error('Error saving tasks:', error);
+    throw error;
   }
+};
+
+export const createNewTask = (taskData, existingTasks) => {
+  const newTask = {
+    id: Date.now().toString(),
+    ...taskData,
+    milestones: taskData.milestones.map(milestone => ({
+      id: Date.now().toString() + Math.random(),
+      title: milestone,
+      done: false
+    })),
+    createdAt: new Date().toISOString(),
+    completed: false,
+  };
+  return [...existingTasks, newTask];
+};
+
+export const removeTask = (taskId, tasks) => {
+  return tasks.filter(task => task.id !== taskId);
 };
 
 export const loadCompletedTasksFromStorage = async () => {
@@ -41,12 +59,13 @@ export const loadCompletedTasksFromStorage = async () => {
   }
 };
 
-export const saveTasksToStorage = async tasks => {
+export const loadBookmarkedQuotesFromStorage = async () => {
   try {
-    await AsyncStorage.setItem('tasks', JSON.stringify(tasks));
+    const savedBookmarkedQuotes = await AsyncStorage.getItem('bookmarkedQuotes');
+    return savedBookmarkedQuotes ? JSON.parse(savedBookmarkedQuotes) : [];
   } catch (error) {
-    console.error('Error saving tasks:', error);
-    throw error;
+    console.error('Error loading bookmarked quotes:', error);
+    return [];
   }
 };
 
@@ -66,26 +85,6 @@ export const saveCompletedTaskToStorage = async tasks => {
     console.error('Error saving completed tasks:', error);
     throw error;
   }
-};
-
-// Task operations
-export const createNewTask = (taskData, existingTasks) => {
-  const newTask = {
-    id: Date.now().toString(),
-    ...taskData,
-    milestones: taskData.milestones.map(milestone => ({
-      id: Date.now().toString() + Math.random(),
-      title: milestone,
-      done: false
-    })),
-    createdAt: new Date().toISOString(),
-    completed: false,
-  };
-  return [...existingTasks, newTask];
-};
-
-export const removeTask = (taskId, tasks) => {
-  return tasks.filter(task => task.id !== taskId);
 };
 
 export const saveBookmarkedQuotesToStorage = async quotes => {
