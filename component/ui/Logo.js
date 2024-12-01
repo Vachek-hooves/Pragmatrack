@@ -3,7 +3,7 @@ import React from 'react';
 
 const Logo = () => {
   return (
-    <View>
+    <View style={styles.logoContainer}>
       <Image
         source={require('../../assets/image/logo/PragmaLogo.png')}
         style={styles.logo}
@@ -15,9 +15,13 @@ const Logo = () => {
 export default Logo;
 
 const styles = StyleSheet.create({
+  logoContainer: {
+    alignItems: 'center',
+    // marginTop: 5,
+  },
   logo: {
-    width: 200,
-    height: 200,
+    width: 300,
+    height: 300,
     borderRadius: '50%',
     overflow: 'hidden',
   },
