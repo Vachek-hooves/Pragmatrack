@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   scrollViewContainer: {
     flex: 1,
     backgroundColor: '#16001E',
-   paddingTop: 50,
+    paddingTop: 50,
   },
   container: {
     flex: 1,
