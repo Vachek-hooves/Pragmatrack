@@ -43,7 +43,8 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name="Add"
-        component={TabNewTaskScreen}
+        component=
+        {TabNewTaskScreen}
         options={{
           tabBarIcon: ({focused}) => (
             <View style={styles.addButtonContainer}>
